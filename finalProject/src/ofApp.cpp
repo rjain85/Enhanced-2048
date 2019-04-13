@@ -5,6 +5,10 @@ void ofApp::setup(){
 	ofSetWindowTitle("2048");
 	ofBackground(11, 182, 205);
 	trench_font.load("trench100free.ttf", 35);
+
+	
+	sound_player.load("CodyKoOutroSong.mp3");
+	sound_player.play();
 }
 
 //--------------------------------------------------------------

@@ -5,6 +5,7 @@
 class ofApp : public ofBaseApp{
 
 	ofTrueTypeFont trench_font;
+	ofSoundPlayer sound_player;
 
 	public:
 		void setup();
