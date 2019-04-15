@@ -7,3 +7,6 @@ I imported the project from where I cloned it and hit generate. I opened the pro
 
 ## April 12
 I set my window title and background color, and I also added music using ofSound. Elizabeth said I shoud focus on implementimg the game before adding the color palette feature, so I'll probably do that.
+
+## April 14
+I created files game_math.h and game.math.cpp. For some reason these weren't automatically created in the src folder, so the compiler couldn't find them. So, I had to use the folder view to drag them into the correct location. Somehow, references still existed which then had to be deleted. 
