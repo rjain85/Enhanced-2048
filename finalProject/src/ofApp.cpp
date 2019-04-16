@@ -10,8 +10,7 @@ void ofApp::setup(){
 	sound_player.play();
 
 	Board boardy;
-	boardy.InitBoard();
-	boardy.RudimentaryPrint();
+	boardy.loop_through_game();
 }
 
 //--------------------------------------------------------------
