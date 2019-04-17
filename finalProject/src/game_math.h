@@ -25,10 +25,13 @@ public:
 	bool isWin();
 
 	void MakeMoves(char input);
+
 	void CompressLeft();
 	void MergeLeft();
 	void CompressUp();
 	void MergeUp();
+	void CompressRight();
+	void MergeRight();
 
 	void loop_through_game();
 

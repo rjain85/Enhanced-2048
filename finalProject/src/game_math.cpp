@@ -119,6 +119,35 @@ void Board::MergeUp() {
 	CompressUp();
 }
 
+void Board::CompressRight() {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = kBoardDimension - 1; j >= 0; j--) {
+			if (board[i][j].value == 0) {
+				for (int k = j - 1; k >= 0; k--) {
+					if (board[i][k].value != 0) {
+						board[i][j].value = board[i][k].value;
+						board[i][k].value = 0;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void Board::MergeRight() {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = kBoardDimension - 1; j > 0; j--) {
+			if (board[i][j].value != 0 && board[i][j].value == board[i][j - 1].value) {
+				board[i][j].value += board[i][j - 1].value;
+				board[i][j - 1].value = 0;
+				score += (((log2(board[i][j].value)) - 1) * board[i][j].value);
+			}
+		}
+	}
+	CompressRight();
+}
+
 void Board::loop_through_game() {
 	InitBoard();
 	RudimentaryPrint();
@@ -146,8 +175,11 @@ void Board::MakeMoves(char input) {
  		CompressUp();
 		//cout << endl << "compressed" << endl;
 		//RudimentaryPrint();
-		cout << endl;
 		MergeUp();
+	}
+	if (input == 'd') {
+		CompressRight();
+		MergeRight();
 	}
 }
 
