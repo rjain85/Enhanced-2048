@@ -204,6 +204,17 @@ void Board::LoopThroughGame() {
 	}
 }
 
+void Board::initializeCopy() {
+	int counter = 1;
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension; j++) {
+			board_copy_[i][j].board_position = counter;
+			board_copy_[i][j].value = 0;
+			counter++;
+		}
+	}
+}
+
 void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
@@ -213,8 +224,15 @@ void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 }
 
 
-void Board::CheckBoardsAreEqual() {
-
+bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension; j++) {
+			if (copy[i][j].value != initial[i][j].value) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 void Board::MakeMoves(char input) {

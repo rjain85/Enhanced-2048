@@ -31,7 +31,7 @@ public:
 	void LoopThroughGame();
 	void initializeCopy();
 	void CopyBoard(Tile initial[4][4], Tile copy[4][4]);
-	void CheckBoardsAreEqual();
+	bool BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]);
 
 	void CompressLeft();
 	void MergeLeft();
