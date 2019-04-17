@@ -148,6 +148,35 @@ void Board::MergeRight() {
 	CompressRight();
 }
 
+void Board::CompressDown() {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = kBoardDimension - 1; j >= 0; j--) {
+			if (board[j][i].value == 0) {
+				for (int k = j - 1; k >= 0; k--) {
+					if (board[k][i].value != 0) {
+						board[j][i].value = board[k][i].value;
+						board[k][i].value = 0;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void Board::MergeDown() {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = kBoardDimension - 1; j > 0; j--) {
+			if (board[j][i].value != 0 && board[j][i].value == board[j - 1][i].value) {
+				board[j][i].value += board[j - 1][i].value;
+				board[j - 1][i].value = 0;
+				score += (((log2(board[j][i].value)) - 1) * board[j][i].value);
+			}
+		}
+	}
+	CompressDown();
+}
+
 void Board::loop_through_game() {
 	InitBoard();
 	RudimentaryPrint();
@@ -180,6 +209,10 @@ void Board::MakeMoves(char input) {
 	if (input == 'd') {
 		CompressRight();
 		MergeRight();
+	}
+	if (input == 's') {
+		CompressDown();
+		MergeDown();
 	}
 }
 
