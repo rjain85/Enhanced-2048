@@ -2,22 +2,30 @@
 
 #include "game_math.h"
 
+// Initialize the board at the beginning of the game to be empty with only two tiles. 
+// One tile has the value two, the other one has the value two or four. 
 void Board::InitBoard() {
+	// Select a random position for the first tile.
 	int first_tile_postion = rand() % kNumOfTiles + 1;
 	int second_tile_position = first_tile_postion;
 
+	// Select a random position for the second tile and ensure that it is not the same as the first.
 	while (second_tile_position == first_tile_postion) {
 		second_tile_position = rand() % kNumOfTiles + 1;
 	}
+	// Randomly select the value of the second tile to be two or four.
 	int second_tile_value = ChooseTwoOrFour();
 	
 	int board_position = 1;
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
+			// Traverse through the board and initialize each value to be 0 unless it is the first or second tile.
 			if (board_position == first_tile_postion) {
 				board[i][j].value = kTwo;
+
 			} else if (board_position == second_tile_position) {
 				board[i][j].value = second_tile_value;
+
 			} else {
 				board[i][j].value = 0;
 				board[i][j].board_position = board_position;
@@ -27,6 +35,7 @@ void Board::InitBoard() {
 	}
 }
 
+// Simply print the board for testing purposes.
 void Board::RudimentaryPrint() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
@@ -36,6 +45,7 @@ void Board::RudimentaryPrint() {
 	}
 }
 
+// Return a vector of positions in the board where the value is 0 (essentially, that position is 'empty').
 vector<int> Board::FindEmptyPositions() {
 	vector<int> possible_postions;
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -48,6 +58,7 @@ vector<int> Board::FindEmptyPositions() {
 	return possible_postions;
 }
 
+// Traverse through the value of each tile in the board to see if 2048 has been reached yet.
 bool Board::isWin() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
@@ -59,7 +70,7 @@ bool Board::isWin() {
 	return false;
 }
 
-
+// Move all the tiles leftwards so that no zeroes lie between nonzero values.
 void Board::CompressLeft() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
@@ -196,14 +207,10 @@ void Board::loop_through_game() {
 void Board::MakeMoves(char input) {
 	if (input == 'a') {
 		CompressLeft();
-		//cout << endl << "compressed" << endl;
-		//RudimentaryPrint();
 		MergeLeft();
 	}
 	if (input == 'w') {
  		CompressUp();
-		//cout << endl << "compressed" << endl;
-		//RudimentaryPrint();
 		MergeUp();
 	}
 	if (input == 'd') {
@@ -237,5 +244,3 @@ void Board::SpawnNewTwo(vector<int> possible_positions) {
 }
 
  
-
-
