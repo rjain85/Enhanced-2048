@@ -59,7 +59,7 @@ vector<int> Board::FindEmptyPositions() {
 }
 
 // Traverse through the value of each tile in the board to see if 2048 has been reached yet.
-bool Board::isWin() {
+bool Board::hasWon() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			if (board_[i][j].value == winning_number) {
@@ -192,7 +192,7 @@ void Board::LoopThroughGame() {
 	InitBoard();
 	InitCopy();
 	RudimentaryPrint();
-	while (!isWin()) {
+	while (!hasWon() && !hasLost()) {
 		char input;
 		cin >> input;
 		MakeMoves(input);
@@ -226,11 +226,27 @@ void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 	}
 }
 
-
 bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			if (copy[i][j].value != initial[i][j].value) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool Board::hasLost() {
+	if (FindEmptyPositions().size() != 0) {
+		return false;
+	}
+	for (int i = 0; i < kBoardDimension - 1; i++) {
+		for (int j = 0; j < kBoardDimension - 1; j++) {
+			if (board_[i][j].value == board_[i][j + 1].value) {
+				return false;
+			}
+			if (board_[i][j].value == board_[i + 1][j].value) {
 				return false;
 			}
 		}
