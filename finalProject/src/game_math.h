@@ -24,8 +24,11 @@ public:
 	vector<int> FindEmptyPositions();
 	bool isWin();
 
+	void MakeMoves(char input);
 	void CompressLeft();
 	void MergeLeft();
+	void CompressUp();
+	void MergeUp();
 
 	void loop_through_game();
 
