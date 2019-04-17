@@ -91,10 +91,10 @@ void Board::MergeLeft() {
 }
 
 void Board::CompressUp() {
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension; j++) {
 			if (board[j][i].value == 0) {
-				for (int k = j + 1; k < 4; k++) {
+				for (int k = j + 1; k < kBoardDimension; k++) {
 					if (board[k][i].value != 0) {
 						board[j][i].value = board[k][i].value;
 						board[k][i].value = 0;
@@ -107,8 +107,8 @@ void Board::CompressUp() {
 }
 
 void Board::MergeUp() {
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension - 1; j++) {
 			if (board[j][i].value != 0 && board[j][i].value == board[j + 1][i].value) {
 				board[j][i].value += board[j + 1][i].value;
 				board[j + 1][i].value = 0;
@@ -138,14 +138,14 @@ void Board::loop_through_game() {
 void Board::MakeMoves(char input) {
 	if (input == 'a') {
 		CompressLeft();
-		cout << endl << "compressed" << endl;
-		RudimentaryPrint();
+		//cout << endl << "compressed" << endl;
+		//RudimentaryPrint();
 		MergeLeft();
 	}
 	if (input == 'w') {
  		CompressUp();
-		cout << endl << "compressed" << endl;
-		RudimentaryPrint();
+		//cout << endl << "compressed" << endl;
+		//RudimentaryPrint();
 		cout << endl;
 		MergeUp();
 	}
