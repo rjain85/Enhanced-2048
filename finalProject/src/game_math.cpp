@@ -59,6 +59,7 @@ bool Board::isWin() {
 	return false;
 }
 
+
 void Board::CompressLeft() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
@@ -76,11 +77,9 @@ void Board::CompressLeft() {
 }
 
 void Board::MergeLeft() {
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 3; j++)
-		{
-			if (board[i][j].value != 0 && board[i][j].value == board[i][j + 1].value)
-			{
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension - 1; j++) {
+			if (board[i][j].value != 0 && board[i][j].value == board[i][j + 1].value) {
 				board[i][j].value += board[i][j + 1].value;
 				board[i][j + 1].value = 0;
 
@@ -91,21 +90,64 @@ void Board::MergeLeft() {
 	CompressLeft();
 }
 
-void Board::loop_through_game()
-{
+void Board::CompressUp() {
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (board[j][i].value == 0) {
+				for (int k = j + 1; k < 4; k++) {
+					if (board[k][i].value != 0) {
+						board[j][i].value = board[k][i].value;
+						board[k][i].value = 0;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void Board::MergeUp() {
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (board[j][i].value != 0 && board[j][i].value == board[j + 1][i].value) {
+				board[j][i].value += board[j + 1][i].value;
+				board[j + 1][i].value = 0;
+				score += (((log2(board[j][i].value)) - 1) * board[j][i].value);
+			}
+		}
+	}
+	CompressUp();
+}
+
+void Board::loop_through_game() {
 	InitBoard();
 	RudimentaryPrint();
 	while (!isWin()) {
 		char input;
 		cin >> input;
-		if (input == 'a') {
-			CompressLeft();
-			MergeLeft();
-			SpawnNewTwo(FindEmptyPositions());
-			cout << endl << "score: " << score << endl;
-		}
+		 
+		MakeMoves(input);
+		SpawnNewTwo(FindEmptyPositions());
+		cout << endl << "score: " << score << endl;
+		
+		RudimentaryPrint();
+ 		cout << endl;
+	}
+}
+
+void Board::MakeMoves(char input) {
+	if (input == 'a') {
+		CompressLeft();
+		cout << endl << "compressed" << endl;
+		RudimentaryPrint();
+		MergeLeft();
+	}
+	if (input == 'w') {
+ 		CompressUp();
+		cout << endl << "compressed" << endl;
 		RudimentaryPrint();
 		cout << endl;
+		MergeUp();
 	}
 }
 
