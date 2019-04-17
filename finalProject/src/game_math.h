@@ -11,20 +11,27 @@ class Board {
 	};
 
 public:
+	Tile board_[4][4];
+	Tile board_copy_[4][4];
+	int score_ = 0;
+
 	const int kBoardDimension = 4;
 	const int kNumOfTiles = 16;
-
 	const int kTwo = 2;
 	const int kFour = 4;
 	const int winning_number = 2048;
+
 	void InitBoard();
 	int ChooseTwoOrFour();
 	void SpawnNewTwo(vector<int> possible_positions);
 	void RudimentaryPrint();
 	vector<int> FindEmptyPositions();
 	bool isWin();
-
 	void MakeMoves(char input);
+	void LoopThroughGame();
+	void initializeCopy();
+	void CopyBoard(Tile initial[4][4], Tile copy[4][4]);
+	void CheckBoardsAreEqual();
 
 	void CompressLeft();
 	void MergeLeft();
@@ -34,13 +41,6 @@ public:
 	void MergeRight();
 	void CompressDown();
 	void MergeDown();
-
-	void loop_through_game();
-
-
-
-	Tile board[4][4];
-	int score = 0;
 };
 
 

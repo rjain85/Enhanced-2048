@@ -21,14 +21,14 @@ void Board::InitBoard() {
 		for (int j = 0; j < kBoardDimension; j++) {
 			// Traverse through the board and initialize each value to be 0 unless it is the first or second tile.
 			if (board_position == first_tile_postion) {
-				board[i][j].value = kTwo;
+				board_[i][j].value = kTwo;
 
 			} else if (board_position == second_tile_position) {
-				board[i][j].value = second_tile_value;
+				board_[i][j].value = second_tile_value;
 
 			} else {
-				board[i][j].value = 0;
-				board[i][j].board_position = board_position;
+				board_[i][j].value = 0;
+				board_[i][j].board_position = board_position;
 			}
 			board_position++;
 		}
@@ -39,7 +39,7 @@ void Board::InitBoard() {
 void Board::RudimentaryPrint() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
-			std::cout << board[i][j].value << " ";
+			std::cout << board_[i][j].value << " ";
 		}
 		std::cout << endl;
 	}
@@ -50,8 +50,8 @@ vector<int> Board::FindEmptyPositions() {
 	vector<int> possible_postions;
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
-			if (board[i][j].value == 0) {
-				possible_postions.push_back(board[i][j].board_position);
+			if (board_[i][j].value == 0) {
+				possible_postions.push_back(board_[i][j].board_position);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ vector<int> Board::FindEmptyPositions() {
 bool Board::isWin() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
-			if (board[i][j].value == winning_number) {
+			if (board_[i][j].value == winning_number) {
 				return true;
 			}
 		}
@@ -74,11 +74,11 @@ bool Board::isWin() {
 void Board::CompressLeft() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
-			if (board[i][j].value == 0) {
+			if (board_[i][j].value == 0) {
 				for (int k = j + 1; k < kBoardDimension; k++) {
-					if (board[i][k].value != 0) {
-						board[i][j].value = board[i][k].value;
-						board[i][k].value = 0;
+					if (board_[i][k].value != 0) {
+						board_[i][j].value = board_[i][k].value;
+						board_[i][k].value = 0;
 						break;
 					}
 				}
@@ -90,11 +90,11 @@ void Board::CompressLeft() {
 void Board::MergeLeft() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension - 1; j++) {
-			if (board[i][j].value != 0 && board[i][j].value == board[i][j + 1].value) {
-				board[i][j].value += board[i][j + 1].value;
-				board[i][j + 1].value = 0;
+			if (board_[i][j].value != 0 && board_[i][j].value == board_[i][j + 1].value) {
+				board_[i][j].value += board_[i][j + 1].value;
+				board_[i][j + 1].value = 0;
 
-				score += ((log2(board[i][j].value)) - 1) * board[i][j].value;
+				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
 			}
 		}
 	}
@@ -104,11 +104,11 @@ void Board::MergeLeft() {
 void Board::CompressUp() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
-			if (board[j][i].value == 0) {
+			if (board_[j][i].value == 0) {
 				for (int k = j + 1; k < kBoardDimension; k++) {
-					if (board[k][i].value != 0) {
-						board[j][i].value = board[k][i].value;
-						board[k][i].value = 0;
+					if (board_[k][i].value != 0) {
+						board_[j][i].value = board_[k][i].value;
+						board_[k][i].value = 0;
 						break;
 					}
 				}
@@ -120,10 +120,10 @@ void Board::CompressUp() {
 void Board::MergeUp() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension - 1; j++) {
-			if (board[j][i].value != 0 && board[j][i].value == board[j + 1][i].value) {
-				board[j][i].value += board[j + 1][i].value;
-				board[j + 1][i].value = 0;
-				score += (((log2(board[j][i].value)) - 1) * board[j][i].value);
+			if (board_[j][i].value != 0 && board_[j][i].value == board_[j + 1][i].value) {
+				board_[j][i].value += board_[j + 1][i].value;
+				board_[j + 1][i].value = 0;
+				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
 			}
 		}
 	}
@@ -133,11 +133,11 @@ void Board::MergeUp() {
 void Board::CompressRight() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = kBoardDimension - 1; j >= 0; j--) {
-			if (board[i][j].value == 0) {
+			if (board_[i][j].value == 0) {
 				for (int k = j - 1; k >= 0; k--) {
-					if (board[i][k].value != 0) {
-						board[i][j].value = board[i][k].value;
-						board[i][k].value = 0;
+					if (board_[i][k].value != 0) {
+						board_[i][j].value = board_[i][k].value;
+						board_[i][k].value = 0;
 						break;
 					}
 				}
@@ -149,10 +149,10 @@ void Board::CompressRight() {
 void Board::MergeRight() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = kBoardDimension - 1; j > 0; j--) {
-			if (board[i][j].value != 0 && board[i][j].value == board[i][j - 1].value) {
-				board[i][j].value += board[i][j - 1].value;
-				board[i][j - 1].value = 0;
-				score += (((log2(board[i][j].value)) - 1) * board[i][j].value);
+			if (board_[i][j].value != 0 && board_[i][j].value == board_[i][j - 1].value) {
+				board_[i][j].value += board_[i][j - 1].value;
+				board_[i][j - 1].value = 0;
+				score_ += (((log2(board_[i][j].value)) - 1) * board_[i][j].value);
 			}
 		}
 	}
@@ -162,11 +162,11 @@ void Board::MergeRight() {
 void Board::CompressDown() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = kBoardDimension - 1; j >= 0; j--) {
-			if (board[j][i].value == 0) {
+			if (board_[j][i].value == 0) {
 				for (int k = j - 1; k >= 0; k--) {
-					if (board[k][i].value != 0) {
-						board[j][i].value = board[k][i].value;
-						board[k][i].value = 0;
+					if (board_[k][i].value != 0) {
+						board_[j][i].value = board_[k][i].value;
+						board_[k][i].value = 0;
 						break;
 					}
 				}
@@ -178,17 +178,17 @@ void Board::CompressDown() {
 void Board::MergeDown() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = kBoardDimension - 1; j > 0; j--) {
-			if (board[j][i].value != 0 && board[j][i].value == board[j - 1][i].value) {
-				board[j][i].value += board[j - 1][i].value;
-				board[j - 1][i].value = 0;
-				score += (((log2(board[j][i].value)) - 1) * board[j][i].value);
+			if (board_[j][i].value != 0 && board_[j][i].value == board_[j - 1][i].value) {
+				board_[j][i].value += board_[j - 1][i].value;
+				board_[j - 1][i].value = 0;
+				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
 			}
 		}
 	}
 	CompressDown();
 }
 
-void Board::loop_through_game() {
+void Board::LoopThroughGame() {
 	InitBoard();
 	RudimentaryPrint();
 	while (!isWin()) {
@@ -197,11 +197,24 @@ void Board::loop_through_game() {
 		 
 		MakeMoves(input);
 		SpawnNewTwo(FindEmptyPositions());
-		cout << endl << "score: " << score << endl;
+		cout << endl << "score: " << score_ << endl;
 		
 		RudimentaryPrint();
  		cout << endl;
 	}
+}
+
+void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension; j++) {
+			copy[i][j].value = initial[i][j].value;
+		}
+	}
+}
+
+
+void Board::CheckBoardsAreEqual() {
+
 }
 
 void Board::MakeMoves(char input) {
@@ -236,8 +249,8 @@ void Board::SpawnNewTwo(vector<int> possible_positions) {
 	int new_two_position = possible_positions[rand() % possible_positions.size()];
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
-			if (board[i][j].board_position == new_two_position) {
-				board[i][j].value = kTwo;
+			if (board_[i][j].board_position == new_two_position) {
+				board_[i][j].value = kTwo;
 			}
 		}
 	}
