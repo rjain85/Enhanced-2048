@@ -190,13 +190,16 @@ void Board::MergeDown() {
 
 void Board::LoopThroughGame() {
 	InitBoard();
+	InitCopy();
 	RudimentaryPrint();
 	while (!isWin()) {
 		char input;
 		cin >> input;
-		 
 		MakeMoves(input);
-		SpawnNewTwo(FindEmptyPositions());
+		if (!BoardsAreEqual(board_, board_copy_)) {
+			SpawnNewTwo(FindEmptyPositions());
+		}
+		CopyBoard(board_, board_copy_);
 		cout << endl << "score: " << score_ << endl;
 		
 		RudimentaryPrint();
@@ -204,7 +207,7 @@ void Board::LoopThroughGame() {
 	}
 }
 
-void Board::initializeCopy() {
+void Board::InitCopy() {
 	int counter = 1;
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
