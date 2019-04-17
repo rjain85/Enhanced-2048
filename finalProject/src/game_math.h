@@ -32,8 +32,6 @@ public:
 	void MergeUp();
 	void CompressRight();
 	void MergeRight();
-	void CompressDown();
-	void MergeDown();
 
 	void loop_through_game();
 
