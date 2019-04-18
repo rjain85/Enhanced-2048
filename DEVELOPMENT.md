@@ -28,4 +28,17 @@ ToDos
 - check if a move actually changes anything. Sometimes, the board will be in such a state where moving it one direction does nothing.
 - copy the board after each move. I will probably use the copy to see if the move actually changed anything. This will probably also be useful in animating the board.
 
+## April 17
+I completed the methods to swipe right and downwards, so now all four directions are complete.
+I also created "board_copy_". I wrote a method called copy_board where after each swipe, the state of the board is copied to the copy_board_. 
+Then I wrote a method to compare if two boards have equals values in each tile. These methods are implemented such that if a swipe does not change the board at all, new tiles are not spawned.
+Next, I wrote a method that returns a boolean indicating whether or not the player has lost. This method calls the FindEmptyPositions method, and if any of the tiles are empty, it automatically returns that the player hasn't lost.
+Then it goes through each each tile in the board and checks that no tile has the same value as a tile adjacent to it. However I think this method might be buggy so I will test it further.
+Also, a weird bug I've noticed is that the window doesn't open unless I comment out the board methods in ofApp, or if I end the game. However, the music continues to play.
+I'm not sure why this is. 
+Overall, the backend is mostly complete.
+ToDos
+- inspect and possibly change the check for loser method.
+- figure out why the window won't open.
+- Begin GUI work.
 
