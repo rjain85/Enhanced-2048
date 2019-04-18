@@ -45,4 +45,6 @@ ToDos
 ## April 18 
 Some thoughts:
 - I might consider adding catch2 testing. Obviously a whole game cannot be simulated due to the random spawning of tiles, but individual methods like compress, merge, and especially checking for loser seem worth testing.
+- The formula for calculating score looks a bit off. I'll do some more research to see if it is correct.
+
 
