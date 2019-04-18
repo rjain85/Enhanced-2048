@@ -42,3 +42,7 @@ ToDos
 - figure out why the window won't open.
 - Begin GUI work.
 
+## April 18 
+Some thoughts:
+- I might consider adding catch2 testing. Obviously a whole game cannot be simulated due to the random spawning of tiles, but individual methods like compress, merge, and especially checking for loser seem worth testing.
+
