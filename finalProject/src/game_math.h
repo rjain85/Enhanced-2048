@@ -6,28 +6,27 @@ using std::vector;
 
 class Board {
 	struct Tile {
-		int value;
-		int board_position;
+		size_t value;
+		size_t board_position;
 	};
 
 public:
 	Tile board_[4][4];
 	Tile board_copy_[4][4];
-	Tile loser_tester_[4][4];
 
 	int score_ = 0;
 
-	const int kBoardDimension = 4;
-	const int kNumOfTiles = 16;
-	const int kTwo = 2;
-	const int kFour = 4;
-	const int winning_number = 2048;
+	const size_t kBoardDimension = 4;
+	const size_t kNumOfTiles = 16;
+	const size_t kTwo = 2;
+	const size_t kFour = 4;
+	const size_t winning_number = 2048;
 
 	void InitBoard();
 	int ChooseTwoOrFour();
-	void SpawnNewTwo(vector<int> possible_positions);
+	void SpawnNewTwo(vector<size_t> possible_positions);
 	void RudimentaryPrint();
-	vector<int> FindEmptyPositions();
+	vector<size_t> FindEmptyPositions();
 	bool hasWon();
 	void MakeMoves(char input);
 	void LoopThroughGame();
