@@ -9,13 +9,14 @@ void ofApp::setup(){
 	sound_player.load("CodyKoOutroSong.mp3");
 	sound_player.play();
 
-	Board boardy;
-	boardy.LoopThroughGame();
+	//Board boardy;
+	//boardy.LoopThroughGame();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	Board boardy;
+	boardy.LoopThroughGame();
 }
 
 //--------------------------------------------------------------
