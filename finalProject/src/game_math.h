@@ -23,7 +23,7 @@ public:
 	const size_t winning_number = 2048;
 
 	void InitBoard();
-	int ChooseTwoOrFour();
+	size_t ChooseTwoOrFour();
 	void SpawnNewTwo(vector<size_t> possible_positions);
 	void RudimentaryPrint();
 	vector<size_t> FindEmptyPositions();
