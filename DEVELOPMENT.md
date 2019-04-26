@@ -47,4 +47,17 @@ Some thoughts:
 - I might consider adding catch2 testing. Obviously a whole game cannot be simulated due to the random spawning of tiles, but individual methods like compress, merge, and especially checking for loser seem worth testing.
 - The formula for calculating score looks a bit off. I'll do some more research to see if it is correct.
 
-
+## April 25
+Began working on changes to backend suggested by Elizabeth:
+- Changed ints to size_t's
+- Simplified if statements in hasLost method
+- Created a simpler method to check for winner by using a global boolean variable that is modified when a player reaches the winning value.
+- Unfortunately, these changes "broke" the code, causing a null pointer problem in the board_copy method. It was not clear on why this occurred but I ended up reverting my commits and redoing some code.
+- During the "re-do," I used less size_t's and stuck to ints in for loops, which seemingly solved the problem.
+Finally, I moved my method calls into ofApp.cpp:
+- Created a should_update boolean and check_game_over method to check if the game is over and update it.
+- Ran methods via a board object in the class.
+Began working on graphics:
+- created a white rectangle that can move across the screen in a pre determined way.
+Notes:
+- Some code in game_math.cpp is now deprectated and will have to be removed.
