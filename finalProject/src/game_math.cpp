@@ -59,7 +59,7 @@ vector<size_t> Board::FindEmptyPositions() {
 }
 
 // Traverse through the value of each tile in the board to see if 2048 has been reached yet.
-bool Board::hasWon() {
+/*bool Board::hasWon() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			if (board_[i][j].value == winning_number) {
@@ -68,7 +68,7 @@ bool Board::hasWon() {
 		}
 	}
 	return false;
-}
+}*/
 
 // Move all the tiles leftwards so that no zeroes lie between nonzero values.
 void Board::CompressLeft() {
@@ -98,7 +98,7 @@ void Board::MergeLeft() {
 				board_[i][j + 1].value = 0;
 				// The score is updated.
 				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
-				winningNumberReached(board_[i][j].value);
+				WinningNumberReached(board_[i][j].value);
 			}
 		}
 	}
@@ -134,7 +134,7 @@ void Board::MergeUp() {
 				board_[j + 1][i].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
-				winningNumberReached(board_[j][i].value);
+				WinningNumberReached(board_[j][i].value);
 			}
 		}
 	}
@@ -170,7 +170,7 @@ void Board::MergeRight() {
 				board_[i][j - 1].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[i][j].value)) - 1) * board_[i][j].value);
-				winningNumberReached(board_[i][j].value);
+				WinningNumberReached(board_[i][j].value);
 			}
 		}
 	}
@@ -206,7 +206,7 @@ void Board::MergeDown() {
 				board_[j - 1][i].value = 0;
 				//The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
-				winningNumberReached(board_[j][i].value);
+				WinningNumberReached(board_[j][i].value);
 			}
 		}
 	}
@@ -218,18 +218,8 @@ void Board::LoopThroughGame() {
 	InitBoard();
 	InitCopy();
 	RudimentaryPrint();
-	while (!has_won && !hasLost()) {
-		char input;
-		cin >> input;
-		MakeMoves(input);
-		if (!BoardsAreEqual(board_, board_copy_)) {
-			SpawnNewTwo(FindEmptyPositions());
-		}
-		CopyBoard(board_, board_copy_);
-		cout << endl << "score: " << score_ << endl;
+	while (!has_won && !HasLost()) {
 		
-		RudimentaryPrint();
- 		cout << endl;
 	}
 	cout << endl << "game over";
 }
@@ -264,7 +254,7 @@ bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) {
 	return true;
 }
 
-bool Board::hasLost() {
+bool Board::HasLost() {
 	if (FindEmptyPositions().size() != 0) {
 		return false;
 	}
@@ -279,10 +269,16 @@ bool Board::hasLost() {
 	return true;
 }
 
-void Board::winningNumberReached(size_t value) {
+void Board::WinningNumberReached(size_t value) {
 	if (value == winning_number) {
 		has_won = true;
 	}
+}
+
+void Board::SetUpGame() {
+	InitBoard();
+	InitCopy();
+	RudimentaryPrint();
 }
 
 void Board::MakeMoves(char input) {
