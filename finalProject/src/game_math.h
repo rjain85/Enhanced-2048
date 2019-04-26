@@ -15,12 +15,13 @@ public:
 	Tile board_copy_[4][4];
 
 	int score_ = 0;
+	bool has_won = false;
 
 	const size_t kBoardDimension = 4;
 	const size_t kNumOfTiles = 16;
 	const size_t kTwo = 2;
 	const size_t kFour = 4;
-	const size_t winning_number = 2048;
+	const size_t winning_number = 32;
 
 	void InitBoard();
 	size_t ChooseTwoOrFour();
@@ -34,7 +35,7 @@ public:
 	void CopyBoard(Tile initial[4][4], Tile copy[4][4]);
 	bool BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]);
 	bool hasLost();
-
+	void winningNumberReached(size_t value);
 
 	void CompressLeft();
 	void MergeLeft();

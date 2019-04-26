@@ -98,6 +98,7 @@ void Board::MergeLeft() {
 				board_[i][j + 1].value = 0;
 				// The score is updated.
 				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
+				winningNumberReached(board_[i][j].value);
 			}
 		}
 	}
@@ -133,6 +134,7 @@ void Board::MergeUp() {
 				board_[j + 1][i].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
+				winningNumberReached(board_[j][i].value);
 			}
 		}
 	}
@@ -168,6 +170,7 @@ void Board::MergeRight() {
 				board_[i][j - 1].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[i][j].value)) - 1) * board_[i][j].value);
+				winningNumberReached(board_[i][j].value);
 			}
 		}
 	}
@@ -203,6 +206,7 @@ void Board::MergeDown() {
 				board_[j - 1][i].value = 0;
 				//The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
+				winningNumberReached(board_[j][i].value);
 			}
 		}
 	}
@@ -214,7 +218,7 @@ void Board::LoopThroughGame() {
 	InitBoard();
 	InitCopy();
 	RudimentaryPrint();
-	while (!hasWon() && !hasLost()) {
+	while (!has_won && !hasLost()) {
 		char input;
 		cin >> input;
 		MakeMoves(input);
@@ -227,6 +231,7 @@ void Board::LoopThroughGame() {
 		RudimentaryPrint();
  		cout << endl;
 	}
+	cout << endl << "game over";
 }
 
 void Board::InitCopy() {
@@ -266,15 +271,18 @@ bool Board::hasLost() {
 	for (int i = 0; i < kBoardDimension - 1; i++) {
 		for (int j = 0; j < kBoardDimension - 1; j++) {
 			// combine these into one if
-			if (board_[i][j].value == board_[i][j + 1].value) {
-				return false;
-			}
-			if (board_[i][j].value == board_[i + 1][j].value) {
+			if (board_[i][j].value == board_[i][j + 1].value || board_[i][j].value == board_[i + 1][j].value) {
 				return false;
 			}
 		}
 	}
 	return true;
+}
+
+void Board::winningNumberReached(size_t value) {
+	if (value == winning_number) {
+		has_won = true;
+	}
 }
 
 void Board::MakeMoves(char input) {
@@ -296,7 +304,7 @@ void Board::MakeMoves(char input) {
 	}
 }
 
-int Board::ChooseTwoOrFour() {
+size_t Board::ChooseTwoOrFour() {
 	int random = rand() % 2;
 	if (random == 0) {
 		return kTwo;
