@@ -70,12 +70,6 @@ bool Board::hasWon() {
 	return false;
 }
 
-void Board::winningNumberReached(size_t value) {
-	if (value == winning_number) {
-		has_won = true;
-	}
-}
-
 // Move all the tiles leftwards so that no zeroes lie between nonzero values.
 void Board::CompressLeft() {
 	for (size_t i = 0; i < kBoardDimension; i++) {
@@ -104,7 +98,6 @@ void Board::MergeLeft() {
 				board_[i][j + 1].value = 0;
 				// The score is updated.
 				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
-				winningNumberReached(board_[i][j].value);
 			}
 		}
 	}
@@ -140,7 +133,6 @@ void Board::MergeUp() {
 				board_[j + 1][i].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
-				winningNumberReached(board_[j][i].value);
 			}
 		}
 	}
@@ -151,7 +143,7 @@ void Board::MergeUp() {
 // Move all the tiles rightwards so that no zeroes lie between nonzero values.
 void Board::CompressRight() {
 	for (size_t i = 0; i < kBoardDimension; i++) {
-		for (size_t j = kBoardDimension - 1; j > 0; j--) {
+		for (size_t j = kBoardDimension - 1; j >= 0; j--) {
 			// If a tile value is zero, and the tile to the left is not zero, change the first tile's value to that of the second tile, and the second tile's value to 0.
 			if (board_[i][j].value == 0) {
 				for (size_t k = j - 1; k >= 0; k--) {
@@ -176,7 +168,6 @@ void Board::MergeRight() {
 				board_[i][j - 1].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[i][j].value)) - 1) * board_[i][j].value);
-				winningNumberReached(board_[i][j].value);
 			}
 		}
 	}
@@ -212,7 +203,6 @@ void Board::MergeDown() {
 				board_[j - 1][i].value = 0;
 				//The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
-				winningNumberReached(board_[j][i].value);
 			}
 		}
 	}
@@ -224,7 +214,7 @@ void Board::LoopThroughGame() {
 	InitBoard();
 	InitCopy();
 	RudimentaryPrint();
-	while (!has_won && !hasLost()) {
+	while (!hasWon() && !hasLost()) {
 		char input;
 		cin >> input;
 		MakeMoves(input);
@@ -259,8 +249,8 @@ void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 }
 
 bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) {
-	for (int i = 0; i < kBoardDimension; i++) {
-		for (int j = 0; j < kBoardDimension; j++) {
+	for (size_t i = 0; i < kBoardDimension; i++) {
+		for (size_t j = 0; j < kBoardDimension; j++) {
 			if (copy[i][j].value != initial[i][j].value) {
 				return false;
 			}

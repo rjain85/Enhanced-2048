@@ -6,16 +6,15 @@ using std::vector;
 
 class Board {
 	struct Tile {
-		int value;
-		int board_position;
+		size_t value;
+		size_t board_position;
 	};
 
 public:
 	Tile board_[4][4];
 	Tile board_copy_[4][4];
 
-	size_t score_ = 0;
-	bool has_won = false;
+	int score_ = 0;
 
 	const size_t kBoardDimension = 4;
 	const size_t kNumOfTiles = 16;
@@ -29,7 +28,6 @@ public:
 	void RudimentaryPrint();
 	vector<size_t> FindEmptyPositions();
 	bool hasWon();
-	void winningNumberReached(size_t value);
 	void MakeMoves(char input);
 	void LoopThroughGame();
 	void InitCopy();
