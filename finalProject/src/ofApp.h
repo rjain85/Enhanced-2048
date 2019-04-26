@@ -24,5 +24,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void check_game_over();
+
+		int x = 0;
+		int y = 0;
+		bool should_update = false;
 
 };
