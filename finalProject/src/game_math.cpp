@@ -219,7 +219,17 @@ void Board::LoopThroughGame() {
 	InitCopy();
 	RudimentaryPrint();
 	while (!has_won && !HasLost()) {
+		char input;
+		cin >> input;
+		MakeMoves(input);
+		if (!BoardsAreEqual(board_, board_copy_)) {
+			SpawnNewTwo(FindEmptyPositions());
+		}
+		CopyBoard(board_, board_copy_);
+		cout << endl << "score: " << score_ << endl;
 		
+		RudimentaryPrint();
+ 		cout << endl;
 	}
 	cout << endl << "game over";
 }
@@ -260,7 +270,6 @@ bool Board::HasLost() {
 	}
 	for (int i = 0; i < kBoardDimension - 1; i++) {
 		for (int j = 0; j < kBoardDimension - 1; j++) {
-			// combine these into one if
 			if (board_[i][j].value == board_[i][j + 1].value || board_[i][j].value == board_[i + 1][j].value) {
 				return false;
 			}
