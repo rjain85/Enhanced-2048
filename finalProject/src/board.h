@@ -28,10 +28,6 @@ public:
 	void SpawnNewTwo(vector<size_t> possible_positions);
 	void RudimentaryPrint();
 	vector<size_t> FindEmptyPositions();
-	//bool hasWon();
-	void MakeMoves(char input);
-	void LoopThroughGame();
-	void InitCopy();
 	void CopyBoard(Tile initial[4][4], Tile copy[4][4]);
 	bool BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]);
 	bool HasLost();
