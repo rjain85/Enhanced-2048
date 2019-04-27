@@ -41,7 +41,7 @@ class ofApp : public ofBaseApp {
 		
 		int tile_dimension = 100;
 		int spacing = 10;
-		bool should_update = false;
+		bool should_update = true;
 		bool game_won = false;
 		bool game_lost = false;
 		bool should_move_board = false;

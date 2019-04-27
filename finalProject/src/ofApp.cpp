@@ -16,26 +16,28 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if (current_state == SETUP && should_update) {
-		board.SetUpGame();
-		current_state = PLAY;
-	}
-	if (current_state == PLAY && should_move_board) {
-		if (!board.BoardsAreEqual(board.board_, board.board_copy_)) {
-			board.SpawnNewTwo(board.FindEmptyPositions());
+	if (should_update == true) {
+		if (current_state == SETUP) {
+			board.SetUpGame();
+			current_state = PLAY;
 		}
-		board.CopyBoard(board.board_, board.board_copy_);
-		cout << endl << "score: " << board.score_ << endl;
+		if (current_state == PLAY && should_move_board) {
+			if (!board.BoardsAreEqual(board.board_, board.board_copy_)) {
+				board.SpawnNewTwo(board.FindEmptyPositions());
+			}
+			board.CopyBoard(board.board_, board.board_copy_);
+			cout << endl << "score: " << board.score_ << endl;
 
-		board.RudimentaryPrint();
-		click.play();
-		cout << endl;
-		check_game_over();
-		if (game_won) {
-			winning_tune.play();
-		}
-		should_move_board = false;
-	}	
+			board.RudimentaryPrint();
+			click.play();
+			cout << endl;
+			check_game_over();
+			if (game_won) {
+				winning_tune.play();
+			}
+			should_move_board = false;
+		}	
+	}
 }
 
 //--------------------------------------------------------------
@@ -79,7 +81,6 @@ void ofApp::keyPressed(int key){
 		if (input == 'B') {
 			cout << endl << 'b' << endl;
 			current_state = SETUP;
-			should_update = true;
 			update();
 		}
 	} else if (current_state == PLAY) {
