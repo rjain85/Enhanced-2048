@@ -279,7 +279,7 @@ bool Board::HasLost() {
 }
 
 void Board::WinningNumberReached(size_t value) {
-	if (value == winning_number) {
+	if (value == kWinningNumber) {
 		has_won = true;
 	}
 }
