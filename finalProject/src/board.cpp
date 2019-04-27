@@ -58,18 +58,6 @@ vector<size_t> Board::FindEmptyPositions() {
 	return possible_postions;
 }
 
-// Traverse through the value of each tile in the board to see if 2048 has been reached yet.
-/*bool Board::hasWon() {
-	for (int i = 0; i < kBoardDimension; i++) {
-		for (int j = 0; j < kBoardDimension; j++) {
-			if (board_[i][j].value == winning_number) {
-				return true;
-			}
-		}
-	}
-	return false;
-}*/
-
 // Move all the tiles leftwards so that no zeroes lie between nonzero values.
 void Board::CompressLeft() {
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -214,25 +202,6 @@ void Board::MergeDown() {
 	CompressDown();
 }
 
-void Board::LoopThroughGame() {
-	InitBoard();
-	InitCopy();
-	RudimentaryPrint();
-	while (!has_won && !HasLost()) {
-		char input;
-		cin >> input;
-		MakeMoves(input);
-		if (!BoardsAreEqual(board_, board_copy_)) {
-			SpawnNewTwo(FindEmptyPositions());
-		}
-		CopyBoard(board_, board_copy_);
-		cout << endl << "score: " << score_ << endl;
-		
-		RudimentaryPrint();
- 		cout << endl;
-	}
-	cout << endl << "game over";
-}
 
 void Board::InitCopy() {
 	int counter = 1;
@@ -288,25 +257,6 @@ void Board::SetUpGame() {
 	InitBoard();
 	InitCopy();
 	RudimentaryPrint();
-}
-
-void Board::MakeMoves(char input) {
-	if (input == 'a') {
-		CompressLeft();
-		MergeLeft();
-	}
-	if (input == 'w') {
- 		CompressUp();
-		MergeUp();
-	}
-	if (input == 'd') {
-		CompressRight();
-		MergeRight();
-	}
-	if (input == 's') {
-		CompressDown();
-		MergeDown();
-	}
 }
 
 size_t Board::ChooseTwoOrFour() {
