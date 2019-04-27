@@ -3,17 +3,27 @@
 #include "ofMain.h"
 #include "board.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp {
 
 	ofTrueTypeFont trench_font;
 	ofSoundPlayer winning_tune;
 	ofSoundPlayer click;
+
+	private:
+		enum GameState {
+			BEGIN,
+			SETUP,
+			PLAY,
+			WIN,
+			LOSS
+		};
 
 	public:
 		void setup();
 		void update();
 		void draw();
 		void drawBoard();
+		void drawBeginningStage();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -28,12 +38,14 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		void check_game_over();
 
-		int x = 0;
-		int y = 0;
+		
 		int tile_dimension = 100;
 		int spacing = 10;
 		bool should_update = false;
 		bool game_won = false;
 		bool game_lost = false;
+		bool should_move_board = false;
+		GameState current_state = BEGIN;
 
+		const std::string kBeginGame = "Press 'B' to begin 2048";
 };

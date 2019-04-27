@@ -12,19 +12,15 @@ void ofApp::setup() {
 
 	winning_tune.load("CodyKoOutroSong.mp3");
 	click.load("Stapler.mp3");
-
-	board.SetUpGame();
-
-	
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-	if (!should_update) {
-		char input;
-		cin >> input;
-		keyPressed(input);
+	if (current_state == SETUP && should_update) {
+		board.SetUpGame();
+		current_state = PLAY;
+	}
+	if (current_state == PLAY && should_move_board) {
 		if (!board.BoardsAreEqual(board.board_, board.board_copy_)) {
 			board.SpawnNewTwo(board.FindEmptyPositions());
 		}
@@ -38,17 +34,21 @@ void ofApp::update(){
 		if (game_won) {
 			winning_tune.play();
 		}
-	}
-	
+		should_move_board = false;
+	}	
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
 	ofSetColor(255, 255, 255);
-	trench_font.drawString("Begin 2048", 50, 50);
-	drawBoard();
-	ofDrawRectangle(x, y, 100, 100);
+	if (current_state == BEGIN) {
+		drawBeginningStage();
+	} else if (current_state == PLAY){
+		drawBoard();
+	}
 }
+
+
 
 void ofApp::drawBoard() {
 	float height = ofGetWindowHeight();
@@ -68,24 +68,49 @@ void ofApp::drawBoard() {
 	}
 }
 
+void ofApp::drawBeginningStage() {
+	trench_font.drawString(kBeginGame, 50, 50);
+}
+
 // shout out to Elizabeth
 void ofApp::keyPressed(int key){
 	int input = toupper(key);
-	if (input == 'A') {
-		board.CompressLeft();
-		board.MergeLeft();
-	}
-	if (input == 'W') {
-		board.CompressUp();
-		board.MergeUp();
-	}
-	if (input == 'D') {
-		board.CompressRight();
-		board.MergeRight();
-	}
-	if (input == 'S') {
-		board.CompressDown();
-		board.MergeDown();
+	if (current_state == BEGIN) {
+		if (input == 'B') {
+			cout << endl << 'b' << endl;
+			current_state = SETUP;
+			should_update = true;
+			update();
+		}
+	} else if (current_state == PLAY) {
+		if (input == 'A') {
+			board.CompressLeft();
+			board.MergeLeft();
+			cout << endl << 'a';
+			should_move_board = true;
+			update();
+		}
+		if (input == 'W') {
+			board.CompressUp();
+			board.MergeUp();
+			cout << endl << 'w';
+			should_move_board = true;
+			update();
+		}
+		if (input == 'D') {
+			board.CompressRight();
+			board.MergeRight();
+			cout << endl << 'd';
+			should_move_board = true;
+			update();
+		}
+		if (input == 'S') {
+			board.CompressDown();
+			board.MergeDown();
+			cout << endl << 's';
+			should_move_board = true;
+			update();
+		}
 	}
 }
 
@@ -136,11 +161,11 @@ void ofApp::gotMessage(ofMessage msg){
 
 void ofApp::check_game_over() {
 	if (board.has_won) {
-		should_update = true;
+		should_update = false;
 		game_won = true;
 	} 
 	if (board.HasLost()) {
-		should_update = true;
+		should_update = false;
 		game_lost = true;
 	}
 }
