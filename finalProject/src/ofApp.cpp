@@ -10,20 +10,17 @@ void ofApp::setup() {
 	ofBackground(11, 182, 205);
 	trench_font.load("trench100free.ttf", 35);
 
-	sound_player.load("CodyKoOutroSong.mp3");
-	sound_player.play();
+	winning_tune.load("CodyKoOutroSong.mp3");
+	click.load("Stapler.mp3");
+
 	board.SetUpGame();
 
-	//Board board;
-	//boardy.LoopThroughGame();
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	//Board board;
-	//boardy.LoopThroughGame();
-	x++;
-	y++;
+
 	if (!should_update) {
 		char input;
 		cin >> input;
@@ -35,10 +32,14 @@ void ofApp::update(){
 		cout << endl << "score: " << board.score_ << endl;
 
 		board.RudimentaryPrint();
+		click.play();
 		cout << endl;
 		check_game_over();
+		if (game_won) {
+			winning_tune.play();
+		}
 	}
-
+	
 }
 
 //--------------------------------------------------------------
@@ -54,7 +55,6 @@ void ofApp::drawBoard() {
 	float width = ofGetWindowWidth();
 	float starting_point_x = (width / 2) - (2 * tile_dimension) - spacing;
 	float starting_point_y = (height / 2) - (2 * tile_dimension) - spacing;
-	//ofDrawRectangle(width/2, height/2, 100, 100);
 	int position_x = starting_point_x;
 	int position_y = starting_point_y;
 
@@ -137,9 +137,11 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::check_game_over() {
 	if (board.has_won) {
 		should_update = true;
+		game_won = true;
 	} 
 	if (board.HasLost()) {
 		should_update = true;
+		game_lost = true;
 	}
 }
 

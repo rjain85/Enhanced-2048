@@ -6,7 +6,8 @@
 class ofApp : public ofBaseApp{
 
 	ofTrueTypeFont trench_font;
-	ofSoundPlayer sound_player;
+	ofSoundPlayer winning_tune;
+	ofSoundPlayer click;
 
 	public:
 		void setup();
@@ -32,5 +33,7 @@ class ofApp : public ofBaseApp{
 		int tile_dimension = 100;
 		int spacing = 10;
 		bool should_update = false;
+		bool game_won = false;
+		bool game_lost = false;
 
 };
