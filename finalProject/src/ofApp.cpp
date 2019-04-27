@@ -48,6 +48,10 @@ void ofApp::draw() {
 	} else if (current_state == PLAY) {
 		drawBoard();
 		drawScore();
+	} else if (current_state == WIN) {
+		drawWin();
+	} else if (current_state == LOSS){
+		drawLoss(); 
 	}
 }
 
@@ -71,6 +75,15 @@ void ofApp::drawBoard() {
 
 void ofApp::drawScore() {
 	trench_font.drawString(kScore + std::to_string(board.score_), 50, 50);
+}
+
+void ofApp::drawWin() {
+	trench_font.drawString(kWonMessage, 50, 50);
+
+}
+
+void ofApp::drawLoss() {
+	trench_font.drawString(kLostMessage, 50, 50);
 }
 
 void ofApp::drawBeginningStage() {
@@ -167,10 +180,12 @@ void ofApp::check_game_over() {
 	if (board.has_won) {
 		should_update = false;
 		game_won = true;
+		current_state = WIN;
 	} 
 	if (board.HasLost()) {
 		should_update = false;
 		game_lost = true;
+		current_state = LOSS;
 	}
 }
 

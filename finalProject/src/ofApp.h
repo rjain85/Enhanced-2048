@@ -24,7 +24,8 @@ class ofApp : public ofBaseApp {
 		void draw();
 		void drawBoard();
 		void drawScore();
-		void drawEnding();
+		void drawWin();
+		void drawLoss();
 		void drawBeginningStage();
 
 		void keyPressed(int key);
