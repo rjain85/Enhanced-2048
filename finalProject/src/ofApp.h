@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "game_math.h"
+#include "board.h"
 
 class ofApp : public ofBaseApp{
 
@@ -12,6 +12,7 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+		void drawBoard();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -28,6 +29,8 @@ class ofApp : public ofBaseApp{
 
 		int x = 0;
 		int y = 0;
+		int tile_dimension = 100;
+		int spacing = 10;
 		bool should_update = false;
 
 };

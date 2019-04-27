@@ -1,6 +1,6 @@
 #pragma once
 
-#include "game_math.h"
+#include "board.h"
 
 // Initialize the board at the beginning of the game to be empty with only two tiles. 
 // One tile has the value two, the other one has the value two or four. 

@@ -1,9 +1,11 @@
 #include "ofApp.h"
+#include "board.h"
+
 
 //--------------------------------------------------------------
 Board board;
 
-void ofApp::setup(){
+void ofApp::setup() {
 	ofSetWindowTitle("2048");
 	ofBackground(11, 182, 205);
 	trench_font.load("trench100free.ttf", 35);
@@ -20,8 +22,8 @@ void ofApp::setup(){
 void ofApp::update(){
 	//Board board;
 	//boardy.LoopThroughGame();
-	//x++;
-	//y++;
+	x++;
+	y++;
 	if (!should_update) {
 		char input;
 		cin >> input;
@@ -34,6 +36,7 @@ void ofApp::update(){
 
 		board.RudimentaryPrint();
 		cout << endl;
+		check_game_over();
 	}
 
 }
@@ -42,7 +45,27 @@ void ofApp::update(){
 void ofApp::draw(){
 	ofSetColor(255, 255, 255);
 	trench_font.drawString("Begin 2048", 50, 50);
+	drawBoard();
 	ofDrawRectangle(x, y, 100, 100);
+}
+
+void ofApp::drawBoard() {
+	float height = ofGetWindowHeight();
+	float width = ofGetWindowWidth();
+	float starting_point_x = (width / 2) - (2 * tile_dimension) - spacing;
+	float starting_point_y = (height / 2) - (2 * tile_dimension) - spacing;
+	//ofDrawRectangle(width/2, height/2, 100, 100);
+	int position_x = starting_point_x;
+	int position_y = starting_point_y;
+
+	for (int i = 0; i < board.kBoardDimension; i++) {
+		for (int j = 0; j < board.kBoardDimension; j++) {
+			ofDrawRectangle(position_x, position_y, tile_dimension, tile_dimension);
+			position_x = position_x + tile_dimension + spacing;
+		}
+		position_x = starting_point_x;
+		position_y = position_y + tile_dimension + spacing;
+	}
 }
 
 // shout out to Elizabeth
