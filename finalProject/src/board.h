@@ -21,7 +21,7 @@ public:
 	const size_t kNumOfTiles = 16;
 	const size_t kTwo = 2;
 	const size_t kFour = 4;
-	const size_t winning_number = 32;
+	const size_t winning_number = 8;
 
 	void InitBoard();
 	size_t ChooseTwoOrFour();
