@@ -23,6 +23,8 @@ class ofApp : public ofBaseApp {
 		void update();
 		void draw();
 		void drawBoard();
+		void drawScore();
+		void drawEnding();
 		void drawBeginningStage();
 
 		void keyPressed(int key);
@@ -48,4 +50,7 @@ class ofApp : public ofBaseApp {
 		GameState current_state = BEGIN;
 
 		const std::string kBeginGame = "Press 'B' to begin 2048";
+		const std::string kScore = "Score: ";
+		const std::string kWonMessage = "You WON!";
+		const std::string kLostMessage = "You lost";
 };

@@ -45,12 +45,11 @@ void ofApp::draw() {
 	ofSetColor(255, 255, 255);
 	if (current_state == BEGIN) {
 		drawBeginningStage();
-	} else if (current_state == PLAY){
+	} else if (current_state == PLAY) {
 		drawBoard();
+		drawScore();
 	}
 }
-
-
 
 void ofApp::drawBoard() {
 	float height = ofGetWindowHeight();
@@ -68,6 +67,10 @@ void ofApp::drawBoard() {
 		position_x = starting_point_x;
 		position_y = position_y + tile_dimension + spacing;
 	}
+}
+
+void ofApp::drawScore() {
+	trench_font.drawString(kScore + std::to_string(board.score_), 50, 50);
 }
 
 void ofApp::drawBeginningStage() {
