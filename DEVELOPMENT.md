@@ -61,3 +61,22 @@ Began working on graphics:
 - created a white rectangle that can move across the screen in a pre determined way.
 Notes:
 - Some code in game_math.cpp is now deprectated and will have to be removed.
+
+## April 26 - 27
+- Created enums for GameState: BEGIN, SETUP, PLAY, WIN, LOSS.
+- Apart from using a GameState object, I use two booleans, should_update and should_move_board to determine what should happen to the UI
+- Wrote draw methods to design the UI for each state
+- Display the score on the window as it is changed
+- For the drawBoard method, I draw one large 450 * 450 square centered on the screen, with 16 smaller 100 * 100 squares within it
+- I decided to load images for the tiles. I used the following resources to design the tiles:
+	- https://www.canva.com/;
+	- https://www.colorhexa.com/
+	- https://meyerweb.com/eric/tools/color-blend/#87ADF1:FFCCFF:2:hex
+- Used a map to match tiles (ofImage objects) to their corresponding values
+- Used a map to match tile postions (1 - 16) to float coordinates that are calculated based off of the size of the window
+- Added sound effects for clicking and winning using ofSound
+- Draw tiles method now takes the values of the board and displays the corresponding tiles in the correct places
+ToDos
+- Create sliding motions for the tiles
+- Add option to restart the game or play again
+- Glam up the UI
