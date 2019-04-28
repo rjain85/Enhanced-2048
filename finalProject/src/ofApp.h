@@ -11,6 +11,14 @@ class ofApp : public ofBaseApp {
 	ofImage tile_two;
 	ofImage tile_four;
 	ofImage tile_eight;
+	ofImage tile_sixteen;
+	ofImage tile_thirty_two;
+	ofImage tile_sixty_four;
+	ofImage tile_one_twenty_eight;
+	ofImage tile_two_fifty_six;
+	ofImage tile_five_twelve;
+	ofImage tile_ten_twenty_four;
+	ofImage tile_twenty_forty_eight;
 
 	private:
 		enum GameState {

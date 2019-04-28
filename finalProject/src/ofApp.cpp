@@ -33,9 +33,9 @@ void ofApp::update() {
 			cout << endl << "score: " << board.score_ << endl;
 
 			board.RudimentaryPrint();
-			for (int i = 0; i < 330; i++) {
+			/*for (int i = 0; i < 330; i++) {
 				x = x + 1;
-			}			
+			}	*/		
 			click.play();
 			cout << endl;
 			CheckGameOver();
@@ -215,12 +215,26 @@ void ofApp::SetUpTileMap() {
 	tile_two.load("2tile.png");
 	tile_four.load("4tile.png");
 	tile_eight.load("8tile.png");
-	//tiles.insert(pair<int, ofImage>(2, tile_two));
-	//tiles.insert(pair<int, ofImage>(4, tile_four));
-	//tiles.insert(pair<int, ofImage>(8, tile_eight));
+	tile_sixteen.load("16tile.png");
+	tile_thirty_two.load("32tile.png");
+	tile_sixty_four.load("64tile.png");
+	tile_one_twenty_eight.load("128tile.png");
+	tile_two_fifty_six.load("256tile.png");
+	tile_five_twelve.load("512tile.png");
+	tile_ten_twenty_four.load("1024tile.png");
+	tile_twenty_forty_eight.load("2048tile.png");
+
 	tiles[2] = tile_two;
 	tiles[4] = tile_four;
 	tiles[8] = tile_eight;
+	tiles[16] = tile_sixteen;
+	tiles[32] = tile_thirty_two;
+	tiles[64] = tile_sixty_four;
+	tiles[128] = tile_one_twenty_eight;
+	tiles[256] = tile_two_fifty_six;
+	tiles[512] = tile_five_twelve;
+	tiles[1024] = tile_ten_twenty_four;
+	tiles[2048] = tile_twenty_forty_eight;
 }
 
 //--------------------------------------------------------------
