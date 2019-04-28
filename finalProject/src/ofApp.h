@@ -30,6 +30,7 @@ class ofApp : public ofBaseApp {
 		void drawWin();
 		void drawLoss();
 		void drawBeginningStage();
+		void drawTiles();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -58,6 +59,7 @@ class ofApp : public ofBaseApp {
 		const std::string kLostMessage = "You lost";
 
 		map<int, ofImage> tiles;
+		map<int, ofImage>::iterator tile_to_draw;
 		map<int, pair<float, float>> positions;
 		float x = (ofGetWindowWidth() / 2) - (2 * kTileDimension) - spacing;
 		float y = (ofGetWindowHeight() / 2) - (2 * kTileDimension) - spacing;

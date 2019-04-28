@@ -9,6 +9,7 @@ void ofApp::setup() {
 	ofSetWindowTitle("2048");
 	ofBackground(11, 182, 205);
 	trench_font.load("trench100free.ttf", 35);
+	SetUpTileMap();
 
 	winning_tune.load("CodyKoOutroSong.mp3");
 	click.load("Stapler.mp3");
@@ -51,7 +52,8 @@ void ofApp::draw() {
 	} else if (current_state == PLAY) {
 		drawBoard();
 		drawScore();
-		tile_two.draw(x, y);
+		//tile_two.draw(x, y);
+		drawTiles();
 	} else if (current_state == WIN) {
 		drawWin();
 	} else if (current_state == LOSS){
@@ -73,8 +75,9 @@ void ofApp::drawBoard() {
 	for (int i = 0; i < board.kBoardDimension; i++) {
 		for (int j = 0; j < board.kBoardDimension; j++) {
 			ofDrawRectangle(position_x, position_y, kTileDimension, kTileDimension);
-			tiles.insert(pair<int, ofImage>(4, tile_four));
-			positions.insert(pair<int, pair<float, float>>(counter, make_pair(position_x, position_y)));
+			//update positions map before continuing to draw board
+			positions[counter] = make_pair(position_x, position_y);
+
 			position_x = position_x + kTileDimension + spacing;
 			counter++;
 		}
@@ -94,6 +97,16 @@ void ofApp::drawWin() {
 
 void ofApp::drawLoss() {
 	trench_font.drawString(kLostMessage, 50, 50);
+}
+
+void ofApp::drawTiles() {
+	int counter = 1;
+	for (int i = 0; i < board.kBoardDimension; i++) {
+		for (int j = 0; j < board.kBoardDimension; j++) {
+			tiles[board.board_[i][j].value].draw(positions[counter].first, positions[counter].second);
+			counter++;
+		}
+	}
 }
 
 void ofApp::drawBeginningStage() {
@@ -202,9 +215,12 @@ void ofApp::SetUpTileMap() {
 	tile_two.load("2tile.png");
 	tile_four.load("4tile.png");
 	tile_eight.load("8tile.png");
-	tiles.insert(pair<int, ofImage>(2, tile_two));
-	tiles.insert(pair<int, ofImage>(4, tile_four));
-	tiles.insert(pair<int, ofImage>(8, tile_eight));
+	//tiles.insert(pair<int, ofImage>(2, tile_two));
+	//tiles.insert(pair<int, ofImage>(4, tile_four));
+	//tiles.insert(pair<int, ofImage>(8, tile_eight));
+	tiles[2] = tile_two;
+	tiles[4] = tile_four;
+	tiles[8] = tile_eight;
 }
 
 //--------------------------------------------------------------
