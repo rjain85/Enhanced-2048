@@ -115,7 +115,7 @@ void Board::CompressUp() {
 // Merges values of tiles upwards.
 void Board::MergeUp() {
 	for (int i = 0; i < kBoardDimension; i++) {
-		for (int j = 0; j < kBoardDimension - 1; j++) {
+		for (int j = 0; j < kBoardDimension; j++) {
 			// If the tile value doesn't equal zero and the tile below it has the value zero
 			// the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[j][i].value != 0 && board_[j][i].value == board_[j + 1][i].value) {
