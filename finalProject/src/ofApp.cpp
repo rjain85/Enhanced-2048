@@ -12,10 +12,13 @@ void ofApp::setup() {
 
 	winning_tune.load("CodyKoOutroSong.mp3");
 	click.load("Stapler.mp3");
+	tile_two.load("2tile.png");
+
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
+	
 	if (should_update == true) {
 		if (current_state == SETUP) {
 			board.SetUpGame();
@@ -29,12 +32,12 @@ void ofApp::update(){
 			cout << endl << "score: " << board.score_ << endl;
 
 			board.RudimentaryPrint();
+			for (int i = 0; i < 330; i++) {
+				x = x + 1;
+			}			
 			click.play();
 			cout << endl;
-			check_game_over();
-			if (game_won) {
-				winning_tune.play();
-			}
+			CheckGameOver();
 			should_move_board = false;
 		}	
 	}
@@ -48,6 +51,7 @@ void ofApp::draw() {
 	} else if (current_state == PLAY) {
 		drawBoard();
 		drawScore();
+		tile_two.draw(x, y);
 	} else if (current_state == WIN) {
 		drawWin();
 	} else if (current_state == LOSS){
@@ -58,18 +62,24 @@ void ofApp::draw() {
 void ofApp::drawBoard() {
 	float height = ofGetWindowHeight();
 	float width = ofGetWindowWidth();
-	float starting_point_x = (width / 2) - (2 * tile_dimension) - spacing;
-	float starting_point_y = (height / 2) - (2 * tile_dimension) - spacing;
+	float starting_point_x = (width / 2) - (2 * kTileDimension) - spacing;
+	float starting_point_y = (height / 2) - (2 * kTileDimension) - spacing;
 	int position_x = starting_point_x;
 	int position_y = starting_point_y;
-
+	ofSetColor(214, 229, 255);
+	ofDrawRectangle(starting_point_x - spacing, starting_point_y - spacing, kBackBoardDimension, kBackBoardDimension);
+	ofSetColor(255, 255, 255);
+	int counter = 1;
 	for (int i = 0; i < board.kBoardDimension; i++) {
 		for (int j = 0; j < board.kBoardDimension; j++) {
-			ofDrawRectangle(position_x, position_y, tile_dimension, tile_dimension);
-			position_x = position_x + tile_dimension + spacing;
+			ofDrawRectangle(position_x, position_y, kTileDimension, kTileDimension);
+			tiles.insert(pair<int, ofImage>(4, tile_four));
+			positions.insert(pair<int, pair<float, float>>(counter, make_pair(position_x, position_y)));
+			position_x = position_x + kTileDimension + spacing;
+			counter++;
 		}
 		position_x = starting_point_x;
-		position_y = position_y + tile_dimension + spacing;
+		position_y = position_y + kTileDimension + spacing;
 	}
 }
 
@@ -91,7 +101,7 @@ void ofApp::drawBeginningStage() {
 }
 
 // shout out to Elizabeth
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
 	int input = toupper(key);
 	if (current_state == BEGIN) {
 		if (input == 'B') {
@@ -176,17 +186,25 @@ void ofApp::gotMessage(ofMessage msg){
 
 }
 
-void ofApp::check_game_over() {
+void ofApp::CheckGameOver() {
 	if (board.has_won) {
 		should_update = false;
-		game_won = true;
 		current_state = WIN;
+		winning_tune.play();
 	} 
 	if (board.HasLost()) {
 		should_update = false;
-		game_lost = true;
 		current_state = LOSS;
 	}
+}
+
+void ofApp::SetUpTileMap() {
+	tile_two.load("2tile.png");
+	tile_four.load("4tile.png");
+	tile_eight.load("8tile.png");
+	tiles.insert(pair<int, ofImage>(2, tile_two));
+	tiles.insert(pair<int, ofImage>(4, tile_four));
+	tiles.insert(pair<int, ofImage>(8, tile_eight));
 }
 
 //--------------------------------------------------------------

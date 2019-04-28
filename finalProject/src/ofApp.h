@@ -8,6 +8,9 @@ class ofApp : public ofBaseApp {
 	ofTrueTypeFont trench_font;
 	ofSoundPlayer winning_tune;
 	ofSoundPlayer click;
+	ofImage tile_two;
+	ofImage tile_four;
+	ofImage tile_eight;
 
 	private:
 		enum GameState {
@@ -39,14 +42,13 @@ class ofApp : public ofBaseApp {
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		void check_game_over();
-
+		void CheckGameOver();
+		void SetUpTileMap();
 		
-		int tile_dimension = 100;
+		const int kTileDimension = 100;
+		const int kBackBoardDimension = 450;
 		int spacing = 10;
 		bool should_update = true;
-		bool game_won = false;
-		bool game_lost = false;
 		bool should_move_board = false;
 		GameState current_state = BEGIN;
 
@@ -54,4 +56,10 @@ class ofApp : public ofBaseApp {
 		const std::string kScore = "Score: ";
 		const std::string kWonMessage = "You WON!";
 		const std::string kLostMessage = "You lost";
+
+		map<int, ofImage> tiles;
+		map<int, pair<float, float>> positions;
+		float x = (ofGetWindowWidth() / 2) - (2 * kTileDimension) - spacing;
+		float y = (ofGetWindowHeight() / 2) - (2 * kTileDimension) - spacing;
+
 };
