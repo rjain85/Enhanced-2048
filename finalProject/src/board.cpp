@@ -116,7 +116,8 @@ void Board::CompressUp() {
 void Board::MergeUp() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension - 1; j++) {
-			// If the tile value doesn't equal zero and the tile below it has the value zero, the value of the first tile equals their sum and the value of the second tile becomes zero.
+			// If the tile value doesn't equal zero and the tile below it has the value zero
+			// the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[j][i].value != 0 && board_[j][i].value == board_[j + 1][i].value) {
 				board_[j][i].value += board_[j + 1][i].value;
 				board_[j + 1][i].value = 0;
@@ -202,7 +203,6 @@ void Board::MergeDown() {
 	CompressDown();
 }
 
-
 void Board::InitCopy() {
 	int counter = 1;
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -222,7 +222,7 @@ void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 	}
 }
 
-bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) {
+bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) { // rename areboardsequal
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			if (copy[i][j].value != initial[i][j].value) {
@@ -234,7 +234,7 @@ bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) {
 }
 
 bool Board::HasLost() {
-	if (FindEmptyPositions().size() != 0) {
+	if (FindEmptyPositions().size() != 0) { // !.Empty
 		return false;
 	}
 	for (int i = 0; i < kBoardDimension - 1; i++) {
@@ -247,7 +247,7 @@ bool Board::HasLost() {
 	return true;
 }
 
-void Board::WinningNumberReached(size_t value) {
+void Board::WinningNumberReached(size_t value) { // updatehaswon
 	if (value == kWinningNumber) {
 		has_won = true;
 	}

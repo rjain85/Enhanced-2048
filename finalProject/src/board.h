@@ -45,7 +45,3 @@ public:
 	void CompressDown();
 	void MergeDown();
 };
-
-
-
-
