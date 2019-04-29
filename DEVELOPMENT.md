@@ -81,7 +81,7 @@ ToDos
 - Add option to restart the game or play again
 - Glam up the UI
 
-April 29th
+## April 29th
 - Spent all day trying to animate the tiles sliding but with no luck
 	- original plan was to store the tiles that merged into another in a vector called contributors, but this led to various issues:
 	- tracking tiles through both compress and merge methods, as well as the compress call in merge
