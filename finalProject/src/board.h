@@ -5,13 +5,14 @@
 using std::vector;
 
 class Board {
+
+public:
 	struct Tile {
 		size_t value;
 		size_t board_position;
 		//vector<size_t> contributors;
 	};
 
-public:
 	void InitBoard();
 
 	size_t ChooseTwoOrFour();
@@ -51,7 +52,6 @@ public:
 
 	void MergeDown();
 
-private:
 	Tile board_[4][4];
 	Tile board_copy_[4][4];
 

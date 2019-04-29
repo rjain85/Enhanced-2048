@@ -41,6 +41,9 @@ void ofApp::update() {
 			CheckGameOver();
 			should_move_board = false;
 		}	
+		/*if (current_state == SLIDE) {
+
+		}*/
 	}
 }
 
@@ -240,6 +243,17 @@ void ofApp::SetUpTileMap() {
 	tiles[1024] = tile_ten_twenty_four;
 	tiles[2048] = tile_twenty_forty_eight;
 }
+
+/** ofApp::Slide() {
+	for (int i = 0; i < board.kBoardDimension; i++) {
+		for (int j = 0; j < board.kBoardDimension; j++) {
+			if (board.board_[i][j].value >= board.board_copy_[i][j].value && board.board_[i][j].contributors.size() > 0) {
+				//tiles[board.board_copy_[i][j].value].draw(positions[counter].first, positions[counter].second);
+				counter++;
+			}
+		}
+	}
+}**/
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 

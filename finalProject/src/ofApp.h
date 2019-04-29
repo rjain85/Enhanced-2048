@@ -25,6 +25,7 @@ class ofApp : public ofBaseApp {
 			BEGIN,
 			SETUP,
 			PLAY,
+			//SLIDE,
 			WIN,
 			LOSS
 		};
@@ -53,7 +54,8 @@ class ofApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
 		void CheckGameOver();
 		void SetUpTileMap();
-		
+		void Slide();
+
 		const int kTileDimension = 100;
 		const int kBackBoardDimension = 450;
 		int spacing = 10;

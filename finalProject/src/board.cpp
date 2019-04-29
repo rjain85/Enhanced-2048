@@ -21,7 +21,7 @@ void Board::InitBoard() {
 		for (int j = 0; j < kBoardDimension; j++) {
 			// Traverse through the board and initialize each value to be 0 unless it is the first or second tile.
 			if (board_position == first_tile_postion) {
-				board_[i][j].value = kTwo;
+				board_[i][j].value = kStartingNumber1;
 
 			} else if (board_position == second_tile_position) {
 				board_[i][j].value = second_tile_value;
@@ -68,7 +68,7 @@ void Board::CompressLeft() {
 					if (board_[i][k].value != 0) {
 						board_[i][j].value = board_[i][k].value;
 						// record which tile in sliding into the place of the initial tile
-						board_[i][j].contributors.push_back(board_[i][k].board_position);
+						//board_[i][j].contributors.push_back(board_[i][k].board_position);
 						board_[i][k].value = 0;
 						break;
 					}
@@ -273,20 +273,19 @@ void Board::SetUpGame() {
 	RudimentaryPrint();
 }
 
-void Board::ClearContributors() {
+/*void Board::ClearContributors() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			board_[i][j].contributors.clear();
 		}
 	}
-} 
-
+*/
 size_t Board::ChooseTwoOrFour() {
 	int random = rand() % 2;
 	if (random == 0) {
-		return kTwo;
+		return kStartingNumber1;
 	} else {
-		return kFour;
+		return kStartingNumber2;
 	}
 }
 
@@ -295,7 +294,7 @@ void Board::SpawnNewTwo(vector<size_t> possible_positions) {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			if (board_[i][j].board_position == new_two_position) {
-				board_[i][j].value = kTwo;
+				board_[i][j].value = kStartingNumber1;
 				break;
 			}
 		}
