@@ -80,3 +80,17 @@ ToDos
 - Create sliding motions for the tiles
 - Add option to restart the game or play again
 - Glam up the UI
+
+April 29th
+- Spent all day trying to animate the tiles sliding but with no luck
+	- original plan was to store the tiles that merged into another in a vector called contributors, but this led to various issues:
+	- tracking tiles through both compress and merge methods, as well as the compress call in merge
+	- sliding tiles that have to move different lengths at roughly the same speed
+- Fixed a bug in the HasLost() method that sometimes caused it to ignore tiles on the edge of the board
+- Cleaned up board.h files
+Problems:
+	- tried to move methods in board.h to private but this limited accessibility everywhere
+ToDos
+	- Add restart option and beautify UI
+	- clean up code
+	- possibly add some customizability to UI... maybe another set of tiles
