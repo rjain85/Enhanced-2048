@@ -127,7 +127,7 @@ void ofApp::keyPressed(int key) {
 		if (input == 'B') {
 			cout << endl << 'b' << endl;
 			current_state = SETUP;
-			update();
+			//update();
 		}
 	} else if (current_state == PLAY) {
 		if (input == 'A') {
@@ -135,28 +135,28 @@ void ofApp::keyPressed(int key) {
 			board.MergeLeft();
 			cout << endl << 'a';
 			should_move_board = true;
-			update();
+			//update();
 		}
 		if (input == 'W') {
 			board.CompressUp();
 			board.MergeUp();
 			cout << endl << 'w';
 			should_move_board = true;
-			update();
+			//update();
 		}
 		if (input == 'D') {
 			board.CompressRight();
 			board.MergeRight();
 			cout << endl << 'd';
 			should_move_board = true;
-			update();
+			//update();
 		}
 		if (input == 'S') {
 			board.CompressDown();
 			board.MergeDown();
 			cout << endl << 's';
 			should_move_board = true;
-			update();
+			//update();
 		}
 	}
 }

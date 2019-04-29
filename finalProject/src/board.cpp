@@ -28,8 +28,8 @@ void Board::InitBoard() {
 
 			} else {
 				board_[i][j].value = 0;
-				board_[i][j].board_position = board_position;
 			}
+			board_[i][j].board_position = board_position;
 			board_position++;
 		}
 	}
