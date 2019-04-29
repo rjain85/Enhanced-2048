@@ -8,6 +8,7 @@ class Board {
 	struct Tile {
 		size_t value;
 		size_t board_position;
+		vector<size_t> contributors;
 	};
 
 public:
@@ -35,6 +36,7 @@ public:
 	bool HasLost();
 	void WinningNumberReached(size_t value);
 	void SetUpGame();
+	void ClearContributors();
 
 	void CompressLeft();
 	void MergeLeft();

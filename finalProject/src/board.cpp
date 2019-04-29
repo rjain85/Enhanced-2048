@@ -67,6 +67,8 @@ void Board::CompressLeft() {
 					// if a tile value is zero, and the tile to the right is not zero, change the first tile's value to that of the second tile, and the second tile's value to 0.
 					if (board_[i][k].value != 0) {
 						board_[i][j].value = board_[i][k].value;
+						// record which tile in sliding into the place of the initial tile
+						board_[i][j].contributors.push_back(board_[i][k].board_position);
 						board_[i][k].value = 0;
 						break;
 					}
@@ -83,6 +85,7 @@ void Board::MergeLeft() {
 			// If the tile value doesn't equal zero and the tile to the right of it has the value zero, the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[i][j].value != 0 && board_[i][j].value == board_[i][j + 1].value) {
 				board_[i][j].value += board_[i][j + 1].value;
+				//board_[i][j].contributors += board_.
 				board_[i][j + 1].value = 0;
 				// The score is updated.
 				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
@@ -237,10 +240,21 @@ bool Board::HasLost() {
 	if (FindEmptyPositions().size() != 0) { // !.Empty
 		return false;
 	}
-	for (int i = 0; i < kBoardDimension - 1; i++) {
-		for (int j = 0; j < kBoardDimension - 1; j++) {
-			if (board_[i][j].value == board_[i][j + 1].value || board_[i][j].value == board_[i + 1][j].value) {
+	for (int i = 0; i < kBoardDimension; i++) { // - 1 ??
+		for (int j = 0; j < kBoardDimension; j++) {
+			/*if (board_[i][j].value == board_[i][j + 1].value || board_[i][j].value == board_[i + 1][j].value) {
 				return false;
+			}*/
+			if (j < kBoardDimension - 1) {
+				if (board_[i][j].value == board_[i][j + 1].value) {
+					return false;
+				}
+			}
+			//check the tile below the chosen tile. Ignore last row.
+			if (i < kBoardDimension - 1) {
+				if (board_[i][j].value == board_[i + 1][j].value) {
+					return false;
+				}
 			}
 		}
 	}
@@ -258,6 +272,14 @@ void Board::SetUpGame() {
 	InitCopy();
 	RudimentaryPrint();
 }
+
+void Board::ClearContributors() {
+	for (int i = 0; i < kBoardDimension; i++) {
+		for (int j = 0; j < kBoardDimension; j++) {
+			board_[i][j].contributors.clear();
+		}
+	}
+} 
 
 size_t Board::ChooseTwoOrFour() {
 	int random = rand() % 2;
