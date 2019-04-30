@@ -8,7 +8,7 @@ Board board;
 void ofApp::setup() {
 	ofSetWindowTitle("2048");
 	ofBackground(171, 197, 245);
-	trench_font.load("pixelmix.ttf", 35);
+	pixel_font.load("pixelmix.ttf", 35);
 	SetUpTileMap();
 
 	winning_tune.load("CodyKoOutroSong.mp3");
@@ -84,16 +84,16 @@ void ofApp::drawBoard() {
 }
 
 void ofApp::drawScore() {
-	trench_font.drawString(kScore + std::to_string(board.score_), 50, 75);
+	pixel_font.drawString(kScore + std::to_string(board.score_), 50, 75);
 }
 
 void ofApp::drawWin() {
-	trench_font.drawString(kWonMessage, 50, 75);
+	pixel_font.drawString(kWonMessage, 50, 75);
 
 }
 
 void ofApp::drawLoss() {
-	trench_font.drawString(kLostMessage, 50, 75);
+	pixel_font.drawString(kLostMessage, 50, 75);
 }
 
 void ofApp::drawTiles() {
@@ -107,7 +107,7 @@ void ofApp::drawTiles() {
 }
 
 void ofApp::drawBeginningStage() {
-	trench_font.drawString(kBeginGame, 50, 75);
+	pixel_font.drawString(kBeginGame, 50, 75);
 }
 
 // shout out to Elizabeth
@@ -212,17 +212,17 @@ void ofApp::CheckGameOver() {
 }
 
 void ofApp::SetUpTileMap() {
-	tile_two.load("2tile.png");
-	tile_four.load("4tile.png");
-	tile_eight.load("8tile.png");
-	tile_sixteen.load("16tile.png");
-	tile_thirty_two.load("32tile.png");
-	tile_sixty_four.load("64tile.png");
-	tile_one_twenty_eight.load("128tile.png");
-	tile_two_fifty_six.load("256tile.png");
-	tile_five_twelve.load("512tile.png");
-	tile_ten_twenty_four.load("1024tile.png");
-	tile_twenty_forty_eight.load("2048tile.png");
+	tile_two.load("2f.png");
+	tile_four.load("4f.png");
+	tile_eight.load("8f.png");
+	tile_sixteen.load("16f.png");
+	tile_thirty_two.load("32f.png");
+	tile_sixty_four.load("64f.png");
+	tile_one_twenty_eight.load("128f.png");
+	tile_two_fifty_six.load("256f.png");
+	tile_five_twelve.load("512f.png");
+	tile_ten_twenty_four.load("1024f.png");
+	tile_twenty_forty_eight.load("2048f.png");
 
 	tiles[2] = tile_two;
 	tiles[4] = tile_four;
