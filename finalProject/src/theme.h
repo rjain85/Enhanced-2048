@@ -5,13 +5,17 @@
 
 class Theme {
 public:
-	map<int, ofImage> tiles;
-
 	void LoadCandyTiles();
+
 	void LoadEarthyTiles();
+
 	void SetUpCandyTileMap();
+
 	void SetUpEarthyTileMap();
 
+	map<int, ofImage> tiles;
+
+private:
 	ofImage tile_two_candy;
 	ofImage tile_four_candy;
 	ofImage tile_eight_candy;
