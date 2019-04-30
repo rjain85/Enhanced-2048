@@ -35,16 +35,6 @@ void Board::InitBoard() {
 	}
 }
 
-// Simply print the board for testing purposes.
-void Board::RudimentaryPrint() {
-	for (int i = 0; i < kBoardDimension; i++) {
-		for (int j = 0; j < kBoardDimension; j++) {
-			std::cout << board_[i][j].value << " ";
-		}
-		std::cout << endl;
-	}
-}
-
 // Return a vector of positions in the board where the value is 0 (essentially, that position is 'empty').
 vector<size_t> Board::FindEmptyPositions() {
 	vector<size_t> possible_postions;
@@ -255,10 +245,10 @@ bool Board::AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]) {
 }
 
 bool Board::HasLost() {
-	if (!FindEmptyPositions().empty()) { // !.Empty
+	if (!FindEmptyPositions().empty()) { 
 		return false;
 	}
-	for (int i = 0; i < kBoardDimension; i++) { // - 1 ??
+	for (int i = 0; i < kBoardDimension; i++) { 
 		for (int j = 0; j < kBoardDimension; j++) {
 			if ((j < kBoardDimension - 1 && board_[i][j].value == board_[i][j + 1].value) || (i < kBoardDimension - 1 && board_[i][j].value == board_[i + 1][j].value))  {
 				return false;
@@ -289,7 +279,6 @@ void Board::SetUpGame() {
 	InitBoard();
 	InitCopy();
 	score_ = 0;
-	RudimentaryPrint();
 }
 
 size_t Board::ChooseTwoOrFour() {

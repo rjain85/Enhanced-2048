@@ -5,7 +5,6 @@
 using std::vector;
 
 class Board {
-
 public:
 	struct Tile {
 		size_t value;
@@ -20,8 +19,6 @@ public:
 
 	void SpawnNewTwo(vector<size_t> possible_positions);
 
-	void RudimentaryPrint();
-
 	vector<size_t> FindEmptyPositions();
 	
 	void InitCopy();
@@ -31,10 +28,6 @@ public:
 	bool HasLost();
 
 	void ResurrectPlayer();
-
-	size_t highest_value = 2;
-
-	size_t position_of_highest_value = 0;
 
 	void UpdateHasWon(size_t value);
 
@@ -55,13 +48,14 @@ public:
 	void MergeDown();
 
 	Tile board_[4][4];
+
 	Tile board_copy_[4][4];
 
 	size_t score_ = 0;
+
 	bool has_won_ = false;
 
 	const size_t kBoardDimension = 4;
-
 
 private: 
 	size_t ChooseTwoOrFour(); 
@@ -70,4 +64,7 @@ private:
 	const size_t kStartingNumber1 = 2;
 	const size_t kStartingNumber2 = 4;
 	const size_t kWinningNumber = 2048;
+
+	size_t highest_value = 2;
+	size_t position_of_highest_value = 0;
 };
