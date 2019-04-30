@@ -259,6 +259,7 @@ void Board::UpdateHasWon(size_t value) { // updatehaswon
 void Board::SetUpGame() {
 	InitBoard();
 	InitCopy();
+	score_ = 0;
 	RudimentaryPrint();
 }
 
