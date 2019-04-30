@@ -76,9 +76,5 @@ private:
 	const std::string kInstructions = "Use keys 'W', 'A', 'S', 'D' to play";
 	const std::string kScore = "SCORE: ";
 	
-
 	map<int, pair<float, float>> positions;
-	float x = (ofGetWindowWidth() / 2) - (2 * kTileDimension) - kSpacing;
-	float y = (ofGetWindowHeight() / 2) - (2 * kTileDimension) - kSpacing;
-
 };
