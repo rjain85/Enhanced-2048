@@ -94,3 +94,24 @@ ToDos
 	- Add restart option and beautify UI
 	- clean up code
 	- possibly add some customizability to UI... maybe another set of tiles
+
+## April 29th
+- Decided to scrap sliding tiles in favor of some new features instead
+- Fixed a few bugs in the backend:
+	- One bug was causing new two's to occasionally spawn over prexxisting tiles due a small error in the initBoard method when positions were indexed
+	- Another bug was occasionally resulting a in a divide by 0 in the SpawnNewTwo method
+- Added ofxGui addon to the project to be on the safe side
+- Added option to restart the game at anytime by pressing 'N'
+- Added option to "resurrect" after your first loss (preserve your score and highest tile value)
+	- Added ResurrectPlayer method and highest value and highest value position varaiables to board class, as well as functionality to track these variables
+- Whether or not the player has "a life" available is stored in a boolean
+- Added a small heart graphic to be displayed when the player has a life available: https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwitjqPNtvjhAhXh01kKHZpODEwQjhx6BAgBEAM&url=https%3A%2F%2Fwww.pinterest.ca%2Fpin%2F558516791280955477%2F&psig=AOvVaw3b9etDZIBtStH0TUEKtW9p&ust=1556734632853184
+- Changed font to "Pixel Mix"
+- Imported song "All Star" by Smash Mouth, to be played when a player loses the game (to provide encouragement!)
+- Created a new theme class to store tile themes. This includes "Candy" (original theme) and "Earthy" (new theme)
+	- Originally, I did not plan on creating a new class, I wanted to create vectors of filenames and import based off of user selection
+	- Unfotunately, because importing has to be done in setup, it was very difficult to do this without user input first
+- Moved tilemap and ofImage to theme class and created Theme object in ofApp
+- Allowed users to select theme choice in Begin stage using buttons made in ofxGui
+- Examined each header file and moved as much code as possible to private
+- Removed code related to printing and other deprecated code
