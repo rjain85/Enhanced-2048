@@ -19,6 +19,7 @@ private:
 	ofTrueTypeFont pixel_font;
 	ofSoundPlayer winning_tune;
 	ofSoundPlayer click;
+	ofSoundPlayer losing_tune;
 	ofxPanel gui_;
 	ofxButton candy_;
 	ofxButton earthy_;

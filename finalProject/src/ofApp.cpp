@@ -35,6 +35,7 @@ void ofApp::setup() {
 	theme.LoadEarthyTiles();
 
 	winning_tune.load("CodyKoOutroSong.mp3");
+	losing_tune.load("AllStar.mp3");
 	click.load("Stapler.mp3");
 
 	gui_.add(candy_.setup("CANDY"));
@@ -151,9 +152,11 @@ void ofApp::keyPressed(int key) {
 
 	if (current_state == WIN || current_state == PLAY || current_state == LOSS) {
 		if (input == 'N') {
+			winning_tune.stop();
+			losing_tune.stop();
 			should_update = true;
 			board.has_won_ = false;
-			current_state = SETUP;
+			current_state = BEGIN;
 		}	
 	}
 	if (current_state == BEGIN) {
@@ -190,6 +193,8 @@ void ofApp::keyPressed(int key) {
 		board.ResurrectPlayer();
 		is_life_available = false;
 		should_update = true;
+		winning_tune.stop();
+		losing_tune.stop();
 		current_state = PLAY;
 	}
 }
@@ -248,6 +253,7 @@ void ofApp::CheckGameOver() {
 	if (board.HasLost()) {
 		should_update = false;
 		current_state = LOSS;
+		losing_tune.play();
 	}
 }
 
