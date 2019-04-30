@@ -252,7 +252,7 @@ bool Board::HasLost() {
 
 void Board::UpdateHasWon(size_t value) { // updatehaswon
 	if (value == kWinningNumber) {
-		has_won = true;
+		has_won_ = true;
 	}
 }
 

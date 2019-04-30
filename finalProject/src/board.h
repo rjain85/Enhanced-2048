@@ -10,12 +10,13 @@ public:
 	struct Tile {
 		size_t value;
 		size_t board_position;
-		//vector<size_t> contributors;
 	};
 
-	void InitBoard();
+	void SetUpGame();
 
-	size_t ChooseTwoOrFour();
+	bool AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]);
+
+	void InitBoard();
 
 	void SpawnNewTwo(vector<size_t> possible_positions);
 
@@ -27,14 +28,9 @@ public:
 
 	void CopyBoard(Tile initial[4][4], Tile copy[4][4]);
 
-	bool AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]);
-
 	bool HasLost();
 
 	void UpdateHasWon(size_t value);
-
-	void SetUpGame();
-	//void ClearContributors();
 
 	void CompressLeft();
 
@@ -55,10 +51,15 @@ public:
 	Tile board_[4][4];
 	Tile board_copy_[4][4];
 
-	int score_ = 0;
-	bool has_won = false;
+	size_t score_ = 0;
+	bool has_won_ = false;
 
 	const size_t kBoardDimension = 4;
+
+
+private: 
+	size_t ChooseTwoOrFour(); // private
+
 	const size_t kNumOfTiles = 16;
 	const size_t kStartingNumber1 = 2;
 	const size_t kStartingNumber2 = 4;

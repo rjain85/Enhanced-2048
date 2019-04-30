@@ -8,7 +8,7 @@ Board board;
 void ofApp::setup() {
 	ofSetWindowTitle("2048");
 	ofBackground(171, 197, 245);
-	trench_font.load("trench100free.ttf", 35);
+	trench_font.load("pixelmix.ttf", 35);
 	SetUpTileMap();
 
 	winning_tune.load("CodyKoOutroSong.mp3");
@@ -18,7 +18,6 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	
 	if (should_update == true) {
 		if (current_state == SETUP) {
 			board.SetUpGame();
@@ -63,12 +62,12 @@ void ofApp::draw() {
 void ofApp::drawBoard() {
 	float height = ofGetWindowHeight();
 	float width = ofGetWindowWidth();
-	float starting_point_x = (width / 2) - (2 * kTileDimension) - spacing;
-	float starting_point_y = (height / 2) - (2 * kTileDimension) - spacing;
+	float starting_point_x = (width / 2) - (2 * kTileDimension) - kSpacing;
+	float starting_point_y = (height / 2) - (2 * kTileDimension) - kSpacing;
 	int position_x = starting_point_x;
 	int position_y = starting_point_y;
 	ofSetColor(214, 229, 255);
-	ofDrawRectangle(starting_point_x - spacing, starting_point_y - spacing, kBackBoardDimension, kBackBoardDimension);
+	ofDrawRectangle(starting_point_x - kSpacing, starting_point_y - kSpacing, kBackBoardDimension, kBackBoardDimension);
 	ofSetColor(255, 255, 255);
 	int counter = 1;
 	for (int i = 0; i < board.kBoardDimension; i++) {
@@ -76,25 +75,25 @@ void ofApp::drawBoard() {
 			ofDrawRectangle(position_x, position_y, kTileDimension, kTileDimension);
 			positions[counter] = make_pair(position_x, position_y);
 
-			position_x = position_x + kTileDimension + spacing;
+			position_x = position_x + kTileDimension + kSpacing;
 			counter++;
 		}
 		position_x = starting_point_x;
-		position_y = position_y + kTileDimension + spacing;
+		position_y = position_y + kTileDimension + kSpacing;
 	}
 }
 
 void ofApp::drawScore() {
-	trench_font.drawString(kScore + std::to_string(board.score_), 50, 50);
+	trench_font.drawString(kScore + std::to_string(board.score_), 50, 75);
 }
 
 void ofApp::drawWin() {
-	trench_font.drawString(kWonMessage, 50, 50);
+	trench_font.drawString(kWonMessage, 50, 75);
 
 }
 
 void ofApp::drawLoss() {
-	trench_font.drawString(kLostMessage, 50, 50);
+	trench_font.drawString(kLostMessage, 50, 75);
 }
 
 void ofApp::drawTiles() {
@@ -108,12 +107,20 @@ void ofApp::drawTiles() {
 }
 
 void ofApp::drawBeginningStage() {
-	trench_font.drawString(kBeginGame, 50, 50);
+	trench_font.drawString(kBeginGame, 50, 75);
 }
 
 // shout out to Elizabeth
 void ofApp::keyPressed(int key) {
 	int input = toupper(key);
+
+	if (current_state == WIN || current_state == PLAY || current_state == LOSS) {
+		if (input == 'N') {
+			current_state = SETUP;
+			should_update = true;
+			cout << "new game plz";
+		}	
+	}
 	if (current_state == BEGIN) {
 		if (input == 'B') {
 			cout << endl << 'b' << endl;
@@ -143,9 +150,8 @@ void ofApp::keyPressed(int key) {
 			board.MergeDown();
 			cout << endl << 's';
 			should_move_board = true;
-			//update();
 		}
-	}
+	} 
 }
 
 //--------------------------------------------------------------
@@ -194,7 +200,7 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 void ofApp::CheckGameOver() {
-	if (board.has_won) {
+	if (board.has_won_) {
 		should_update = false;
 		current_state = WIN;
 		winning_tune.play();
@@ -230,7 +236,6 @@ void ofApp::SetUpTileMap() {
 	tiles[1024] = tile_ten_twenty_four;
 	tiles[2048] = tile_twenty_forty_eight;
 }
-
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
