@@ -100,7 +100,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -140,7 +140,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -163,7 +163,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -180,13 +180,36 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\board.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\board.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxBaseGui.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxButton.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxColorPicker.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxGuiGroup.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxInputField.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxLabel.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxPanel.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxSlider.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxSliderGroup.cpp" />
+    <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="src\theme.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\board.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\board.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxColorPicker.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxInputField.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="src\theme.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
