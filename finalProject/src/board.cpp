@@ -89,7 +89,7 @@ void Board::MergeLeft() {
 				board_[i][j + 1].value = 0;
 				// The score is updated.
 				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
-				WinningNumberReached(board_[i][j].value);
+				UpdateHasWon(board_[i][j].value);
 			}
 		}
 	}
@@ -126,7 +126,7 @@ void Board::MergeUp() {
 				board_[j + 1][i].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
-				WinningNumberReached(board_[j][i].value);
+				UpdateHasWon(board_[j][i].value);
 			}
 		}
 	}
@@ -162,7 +162,7 @@ void Board::MergeRight() {
 				board_[i][j - 1].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[i][j].value)) - 1) * board_[i][j].value);
-				WinningNumberReached(board_[i][j].value);
+				UpdateHasWon(board_[i][j].value);
 			}
 		}
 	}
@@ -198,7 +198,7 @@ void Board::MergeDown() {
 				board_[j - 1][i].value = 0;
 				//The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
-				WinningNumberReached(board_[j][i].value);
+				UpdateHasWon(board_[j][i].value);
 			}
 		}
 	}
@@ -225,7 +225,7 @@ void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 	}
 }
 
-bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) { // rename areboardsequal
+bool Board::AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]) { 
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
 			if (copy[i][j].value != initial[i][j].value) {
@@ -237,31 +237,20 @@ bool Board::BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]) { // rename areb
 }
 
 bool Board::HasLost() {
-	if (FindEmptyPositions().size() != 0) { // !.Empty
+	if (!FindEmptyPositions().empty()) { // !.Empty
 		return false;
 	}
 	for (int i = 0; i < kBoardDimension; i++) { // - 1 ??
 		for (int j = 0; j < kBoardDimension; j++) {
-			/*if (board_[i][j].value == board_[i][j + 1].value || board_[i][j].value == board_[i + 1][j].value) {
+			if ((j < kBoardDimension - 1 && board_[i][j].value == board_[i][j + 1].value) || (i < kBoardDimension - 1 && board_[i][j].value == board_[i + 1][j].value))  {
 				return false;
-			}*/
-			if (j < kBoardDimension - 1) {
-				if (board_[i][j].value == board_[i][j + 1].value) {
-					return false;
-				}
-			}
-			//check the tile below the chosen tile. Ignore last row.
-			if (i < kBoardDimension - 1) {
-				if (board_[i][j].value == board_[i + 1][j].value) {
-					return false;
-				}
 			}
 		}
 	}
 	return true;
 }
 
-void Board::WinningNumberReached(size_t value) { // updatehaswon
+void Board::UpdateHasWon(size_t value) { // updatehaswon
 	if (value == kWinningNumber) {
 		has_won = true;
 	}
@@ -273,13 +262,6 @@ void Board::SetUpGame() {
 	RudimentaryPrint();
 }
 
-/*void Board::ClearContributors() {
-	for (int i = 0; i < kBoardDimension; i++) {
-		for (int j = 0; j < kBoardDimension; j++) {
-			board_[i][j].contributors.clear();
-		}
-	}
-*/
 size_t Board::ChooseTwoOrFour() {
 	int random = rand() % 2;
 	if (random == 0) {

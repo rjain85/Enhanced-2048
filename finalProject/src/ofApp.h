@@ -25,7 +25,6 @@ class ofApp : public ofBaseApp {
 			BEGIN,
 			SETUP,
 			PLAY,
-			//SLIDE,
 			WIN,
 			LOSS
 		};

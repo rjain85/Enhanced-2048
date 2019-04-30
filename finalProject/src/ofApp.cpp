@@ -14,7 +14,6 @@ void ofApp::setup() {
 	winning_tune.load("CodyKoOutroSong.mp3");
 	click.load("Stapler.mp3");
 	tile_two.load("2tile.png");
-
 }
 
 //--------------------------------------------------------------
@@ -26,24 +25,18 @@ void ofApp::update() {
 			current_state = PLAY;
 		}
 		if (current_state == PLAY && should_move_board) {
-			if (!board.BoardsAreEqual(board.board_, board.board_copy_)) {
+			if (!board.AreBoardsEqual(board.board_, board.board_copy_)) {
 				board.SpawnNewTwo(board.FindEmptyPositions());
 			}
 			board.CopyBoard(board.board_, board.board_copy_);
 			cout << endl << "score: " << board.score_ << endl;
 
-			board.RudimentaryPrint();
-			/*for (int i = 0; i < 330; i++) {
-				x = x + 1;
-			}	*/		
+			board.RudimentaryPrint();		
 			click.play();
 			cout << endl;
 			CheckGameOver();
 			should_move_board = false;
 		}	
-		/*if (current_state == SLIDE) {
-
-		}*/
 	}
 }
 
@@ -55,7 +48,6 @@ void ofApp::draw() {
 	} else if (current_state == PLAY) {
 		drawBoard();
 		drawScore();
-		//tile_two.draw(x, y);
 		drawTiles();
 	} else if (current_state == WIN) {
 		drawBoard();
@@ -82,7 +74,6 @@ void ofApp::drawBoard() {
 	for (int i = 0; i < board.kBoardDimension; i++) {
 		for (int j = 0; j < board.kBoardDimension; j++) {
 			ofDrawRectangle(position_x, position_y, kTileDimension, kTileDimension);
-			//update positions map before continuing to draw board
 			positions[counter] = make_pair(position_x, position_y);
 
 			position_x = position_x + kTileDimension + spacing;
@@ -127,7 +118,6 @@ void ofApp::keyPressed(int key) {
 		if (input == 'B') {
 			cout << endl << 'b' << endl;
 			current_state = SETUP;
-			//update();
 		}
 	} else if (current_state == PLAY) {
 		if (input == 'A') {
@@ -135,21 +125,18 @@ void ofApp::keyPressed(int key) {
 			board.MergeLeft();
 			cout << endl << 'a';
 			should_move_board = true;
-			//update();
 		}
 		if (input == 'W') {
 			board.CompressUp();
 			board.MergeUp();
 			cout << endl << 'w';
 			should_move_board = true;
-			//update();
 		}
 		if (input == 'D') {
 			board.CompressRight();
 			board.MergeRight();
 			cout << endl << 'd';
 			should_move_board = true;
-			//update();
 		}
 		if (input == 'S') {
 			board.CompressDown();
@@ -244,16 +231,6 @@ void ofApp::SetUpTileMap() {
 	tiles[2048] = tile_twenty_forty_eight;
 }
 
-/** ofApp::Slide() {
-	for (int i = 0; i < board.kBoardDimension; i++) {
-		for (int j = 0; j < board.kBoardDimension; j++) {
-			if (board.board_[i][j].value >= board.board_copy_[i][j].value && board.board_[i][j].contributors.size() > 0) {
-				//tiles[board.board_copy_[i][j].value].draw(positions[counter].first, positions[counter].second);
-				counter++;
-			}
-		}
-	}
-}**/
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 

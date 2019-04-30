@@ -27,11 +27,11 @@ public:
 
 	void CopyBoard(Tile initial[4][4], Tile copy[4][4]);
 
-	bool BoardsAreEqual(Tile initial[4][4], Tile copy[4][4]);
+	bool AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]);
 
 	bool HasLost();
 
-	void WinningNumberReached(size_t value);
+	void UpdateHasWon(size_t value);
 
 	void SetUpGame();
 	//void ClearContributors();
