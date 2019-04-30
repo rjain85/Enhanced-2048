@@ -21,10 +21,13 @@ void ofApp::setup() {
 
 	winning_tune.load("CodyKoOutroSong.mp3");
 	losing_tune.load("AllStar.mp3");
+	beginning_tune_.load("ilomilo.mp3");
 	click.load("Stapler.mp3");
 
 	gui_.add(candy_.setup("CANDY"));
 	gui_.add(earthy_.setup("EARTHY"));
+
+	beginning_tune_.play();
 
 }
 
@@ -149,16 +152,14 @@ void ofApp::keyPressed(int key) {
 		if (input == 'N') {
 			winning_tune.stop();
 			losing_tune.stop();
-			should_update = true;
-			board.has_won_ = false;
-			is_theme_candy_ = false;
-			is_theme_earthy_ = false;
-			current_state = BEGIN;
+			beginning_tune_.play();
+			ReturnToDefaults();
 		}	
 	}
 	if (current_state == BEGIN) {
 		if (input == 'B') {
 			current_state = SETUP;
+			beginning_tune_.stop();
 		}
 	} else if (current_state == PLAY) {
 		if (input == 'A') {
@@ -211,6 +212,15 @@ void ofApp::initializeTileTheme() {
 	} else {
 		theme.SetUpEarthyTileMap();
 	}
+}
+
+void ofApp::ReturnToDefaults() {
+	should_update = true;
+	is_life_available = true;
+	board.has_won_ = false;
+	is_theme_candy_ = false;
+	is_theme_earthy_ = false;
+	current_state = BEGIN;
 }
 
 void ofApp::candyButtonPressed() {

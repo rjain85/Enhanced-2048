@@ -22,6 +22,7 @@ private:
 	ofSoundPlayer winning_tune;
 	ofSoundPlayer click;
 	ofSoundPlayer losing_tune;
+	ofSoundPlayer beginning_tune_;
 	ofxPanel gui_;
 	ofxButton candy_;
 	ofxButton earthy_;
@@ -59,6 +60,8 @@ private:
 	void CheckGameOver();
 
 	void initializeTileTheme();
+
+	void ReturnToDefaults();
 		
 	const int kTileDimension = 100;
 	const int kBackBoardDimension = 450;
