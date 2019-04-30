@@ -2,10 +2,14 @@
 #include "board.h"
 #include "theme.h"
 
-// Maintain values and run methods via a Board object.
+/**
+ * Maintain values and run methods via a Board object.
+**/
 Board board;
 
-// Load tile images via a theme object.
+/**
+ * Load tile images via a theme object.
+**/
 Theme theme;
 
 /**
