@@ -80,13 +80,17 @@ void ofApp::draw() {
 void ofApp::drawBoard() {
 	float height = ofGetWindowHeight();
 	float width = ofGetWindowWidth();
+
 	float starting_point_x = (width / 2) - (2 * kTileDimension) - kSpacing;
 	float starting_point_y = (height / 2) - (2 * kTileDimension) - kSpacing;
+
 	int position_x = starting_point_x;
 	int position_y = starting_point_y;
+
 	ofSetColor(214, 229, 255);
 	ofDrawRectangle(starting_point_x - kSpacing, starting_point_y - kSpacing, kBackBoardDimension, kBackBoardDimension);
 	ofSetColor(255, 255, 255);
+
 	int counter = 1;
 	for (int i = 0; i < board.kBoardDimension; i++) {
 		for (int j = 0; j < board.kBoardDimension; j++) {
