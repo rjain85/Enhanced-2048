@@ -64,7 +64,7 @@ public:
 
 
 private: 
-	size_t ChooseTwoOrFour(); // private
+	size_t ChooseTwoOrFour(); 
 
 	const size_t kNumOfTiles = 16;
 	const size_t kStartingNumber1 = 2;

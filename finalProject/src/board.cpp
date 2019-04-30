@@ -302,6 +302,9 @@ size_t Board::ChooseTwoOrFour() {
 }
 
 void Board::SpawnNewTwo(vector<size_t> possible_positions) {
+	if (possible_positions.size() == 0) {
+		return;
+	}
 	int new_two_position = possible_positions[rand() % possible_positions.size()];
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = 0; j < kBoardDimension; j++) {
