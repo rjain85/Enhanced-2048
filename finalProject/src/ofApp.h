@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ofMain.h"
 #include "board.h"
+#include "ofMain.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp {
 
@@ -18,18 +19,13 @@ private:
 	ofTrueTypeFont pixel_font;
 	ofSoundPlayer winning_tune;
 	ofSoundPlayer click;
-
-	ofImage tile_two;
-	ofImage tile_four;
-	ofImage tile_eight;
-	ofImage tile_sixteen;
-	ofImage tile_thirty_two;
-	ofImage tile_sixty_four;
-	ofImage tile_one_twenty_eight;
-	ofImage tile_two_fifty_six;
-	ofImage tile_five_twelve;
-	ofImage tile_ten_twenty_four;
-	ofImage tile_twenty_forty_eight;
+	ofxPanel gui_;
+	ofxButton candy_;
+	ofxButton earthy_;
+	void candyButtonPressed();
+	void earthyButtonPressed();
+	bool is_theme_candy_ = false;
+	bool is_theme_earthy_ = false;
 		
 	void setup();
 
@@ -72,11 +68,9 @@ private:
 	void gotMessage(ofMessage msg);
 	
 	void CheckGameOver();
-	
-	void SetUpTileMap();
-	
-	void Slide();
 
+	void initializeTileTheme();
+		
 	const int kTileDimension = 100;
 	const int kBackBoardDimension = 450;
 	const int kSpacing = 10;
@@ -90,8 +84,6 @@ private:
 	const std::string kWonMessage = "You WON!";
 	const std::string kLostMessage = "You lost";
 
-	map<int, ofImage> tiles;
-	map<int, ofImage>::iterator tile_to_draw;
 	map<int, pair<float, float>> positions;
 	float x = (ofGetWindowWidth() / 2) - (2 * kTileDimension) - kSpacing;
 	float y = (ofGetWindowHeight() / 2) - (2 * kTileDimension) - kSpacing;

@@ -1,25 +1,52 @@
 #include "ofApp.h"
 #include "board.h"
+#include "theme.h"
 
 
 //--------------------------------------------------------------
 Board board;
+Theme theme;
+
+void ofApp::candyButtonPressed() {
+	if (is_theme_candy_) {
+		is_theme_candy_ = false;
+	} else {
+		is_theme_candy_ = true;
+	}
+}
+
+void ofApp::earthyButtonPressed() {
+	if (is_theme_earthy_) {
+		is_theme_earthy_ = false;
+	} else {
+		is_theme_earthy_ = true;
+	}
+}
 
 void ofApp::setup() {
 	ofSetWindowTitle("2048");
 	ofBackground(171, 197, 245);
 	pixel_font.load("pixelmix.ttf", 35);
-	SetUpTileMap();
+	gui_.setup("Select Theme");
+	candy_.addListener(this, &ofApp::candyButtonPressed);
+	earthy_.addListener(this, &ofApp::earthyButtonPressed);
+
+	theme.LoadCandyTiles();
+	theme.LoadEarthyTiles();
 
 	winning_tune.load("CodyKoOutroSong.mp3");
 	click.load("Stapler.mp3");
-	tile_two.load("2tile.png");
+
+	gui_.add(candy_.setup("CANDY"));
+	gui_.add(earthy_.setup("EARTHY"));
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	if (should_update == true) {
 		if (current_state == SETUP) {
+			initializeTileTheme();
 			board.SetUpGame();
 			current_state = PLAY;
 		}
@@ -44,6 +71,7 @@ void ofApp::draw() {
 	ofSetColor(255, 255, 255);
 	if (current_state == BEGIN) {
 		drawBeginningStage();
+		gui_.draw();
 	} else if (current_state == PLAY) {
 		drawBoard();
 		drawScore();
@@ -100,14 +128,14 @@ void ofApp::drawTiles() {
 	int counter = 1;
 	for (int i = 0; i < board.kBoardDimension; i++) {
 		for (int j = 0; j < board.kBoardDimension; j++) {
-			tiles[board.board_[i][j].value].draw(positions[counter].first, positions[counter].second);
+			theme.tiles[board.board_[i][j].value].draw(positions[counter].first, positions[counter].second);
 			counter++;
 		}
 	}
 }
 
 void ofApp::drawBeginningStage() {
-	pixel_font.drawString(kBeginGame, 50, 75);
+	pixel_font.drawString(kBeginGame, 50, 150);
 }
 
 // shout out to Elizabeth
@@ -211,31 +239,15 @@ void ofApp::CheckGameOver() {
 	}
 }
 
-void ofApp::SetUpTileMap() {
-	tile_two.load("2f.png");
-	tile_four.load("4f.png");
-	tile_eight.load("8f.png");
-	tile_sixteen.load("16f.png");
-	tile_thirty_two.load("32f.png");
-	tile_sixty_four.load("64f.png");
-	tile_one_twenty_eight.load("128f.png");
-	tile_two_fifty_six.load("256f.png");
-	tile_five_twelve.load("512f.png");
-	tile_ten_twenty_four.load("1024f.png");
-	tile_twenty_forty_eight.load("2048f.png");
-
-	tiles[2] = tile_two;
-	tiles[4] = tile_four;
-	tiles[8] = tile_eight;
-	tiles[16] = tile_sixteen;
-	tiles[32] = tile_thirty_two;
-	tiles[64] = tile_sixty_four;
-	tiles[128] = tile_one_twenty_eight;
-	tiles[256] = tile_two_fifty_six;
-	tiles[512] = tile_five_twelve;
-	tiles[1024] = tile_ten_twenty_four;
-	tiles[2048] = tile_twenty_forty_eight;
+void ofApp::initializeTileTheme() {
+	if (is_theme_candy_ && !is_theme_earthy_ || is_theme_candy_ && is_theme_earthy_ || !is_theme_candy_ && !is_theme_earthy_) {
+		theme.SetUpCandyTileMap();
+	}
+	else /*if (earthy_ && !candy_)*/{
+		theme.SetUpEarthyTileMap();
+	}
 }
+
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
