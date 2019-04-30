@@ -7,6 +7,7 @@
 class ofApp : public ofBaseApp {
 
 private:
+	// Enum representing the current state of the game
 	enum GameState {
 		BEGIN,
 		SETUP,
@@ -18,6 +19,16 @@ private:
 	void setup();
 
 	void update();
+
+	void keyPressed(int key);
+
+	void CheckGameOver();
+
+	void InitTileTheme();
+
+	void ReturnToDefaults();
+
+	// Drawing Methods for UI design:
 
 	void draw();
 
@@ -35,62 +46,23 @@ private:
 
 	void DrawTiles();
 
-	void keyPressed(int key);
-			
-	void CheckGameOver();
-
-	void InitTileTheme();
-
-	void ReturnToDefaults();
+	// Methods to Control Buttons:
 
 	void CandyButtonPressed();
 
 	void EarthyButtonPressed();
 
-	const std::string kName = "Enhanced 2048";
-
+	// Fonts
 	ofTrueTypeFont pixel_font_large_;
 	ofTrueTypeFont pixel_font_small_;
 
+	// Font filenames and constant sizes
 	const std::string kPixelFont = "pixelmix.ttf";
 	const int kLargeFontSize = 35;
 	const int kSmallFontSize = 18;
 
-	ofSoundPlayer winning_tune_;
-	ofSoundPlayer click_;
-	ofSoundPlayer losing_tune_;
-	ofSoundPlayer beginning_tune_;
-
-	const std::string kBeginningTune = "ilomilo.mp3";
-	const std::string kClick = "Stapler.mp3";
-	const std::string kLosingTune = "AllStar.mp3";
-	const std::string kWinningTune = "CodyKoOutroSong.mp3";
-
-	ofxPanel gui_;
-	ofxButton candy_;
-	ofxButton earthy_;
-
-	const std::string kThemeLabel = "Select Theme";
-	const std::string kCandyLabel = "CANDY";
-	const std::string kEarthyLabel = "EARTHY";
-
-	ofImage heart_;
-
-	const std::string kHeartImage = "pixelheart.gif";
-
-	bool is_theme_candy_ = false;
-	bool is_theme_earthy_ = false;
-
-	bool is_life_available = true;
-		
-	const int kTileDimension = 100;
-	const int kBackBoardDimension = 450;
-	const int kSpacing = 10;
-
-	bool should_update_ = true;
-	bool should_move_board_ = false;
-	GameState current_state_ = BEGIN;
-
+	// Messages displayed on the UI
+	const std::string kName = "Enhanced 2048";
 	const std::string kBeginGame = "Press 'B' to begin 2048";
 	const std::string kWonMessage = "You WON!";
 	const std::string kLostMessage = "You lost";
@@ -98,6 +70,51 @@ private:
 	const std::string kResurrectMessage = "Press 'R' to resurrect";
 	const std::string kInstructions = "Use keys 'W', 'A', 'S', 'D' to play";
 	const std::string kScore = "SCORE: ";
-	
+
+	// Music Players
+	ofSoundPlayer winning_tune_;
+	ofSoundPlayer click_;
+	ofSoundPlayer losing_tune_;
+	ofSoundPlayer beginning_tune_;
+
+	// Music Filenames
+	const std::string kBeginningTune = "ilomilo.mp3";
+	const std::string kClick = "Stapler.mp3";
+	const std::string kLosingTune = "AllStar.mp3";
+	const std::string kWinningTune = "CodyKoOutroSong.mp3";
+
+	// ofxGui objects
+	ofxPanel gui_;
+	ofxButton candy_;
+	ofxButton earthy_;
+
+	// ofxGui button labels
+	const std::string kThemeLabel = "Select Theme";
+	const std::string kCandyLabel = "CANDY";
+	const std::string kEarthyLabel = "EARTHY";
+
+	// Image
+	ofImage heart_;
+
+	// Image filename
+	const std::string kHeartImage = "pixelheart.gif";
+
+	// Map that corresponds tile position number with x and y coordinates:
 	map<int, pair<float, float>> positions_;
+
+	// Global Variables initialized to default states:
+	GameState current_state_ = BEGIN;
+
+	bool is_theme_candy_ = false;
+	bool is_theme_earthy_ = false;
+
+	bool is_life_available = true;
+
+	bool should_update_ = true;
+	bool should_move_board_ = false;
+		
+	// Constant Dimensions for UI elements
+	const int kTileDimension = 100;
+	const int kBackBoardDimension = 450;
+	const int kSpacing = 10;
 };
