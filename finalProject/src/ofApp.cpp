@@ -40,10 +40,7 @@ void ofApp::update() {
 			if (!board.AreBoardsEqual(board.board_, board.board_copy_)) {
 				board.SpawnNewTwo(board.FindEmptyPositions());
 			}
-			board.CopyBoard(board.board_, board.board_copy_);
-			cout << endl << "score: " << board.score_ << endl;
-
-			board.RudimentaryPrint();		
+			board.CopyBoard(board.board_, board.board_copy_);	
 			click.play();
 			cout << endl;
 			CheckGameOver();
@@ -157,32 +154,27 @@ void ofApp::keyPressed(int key) {
 	}
 	if (current_state == BEGIN) {
 		if (input == 'B') {
-			cout << endl << 'b' << endl;
 			current_state = SETUP;
 		}
 	} else if (current_state == PLAY) {
 		if (input == 'A') {
 			board.CompressLeft();
 			board.MergeLeft();
-			cout << endl << 'a';
 			should_move_board = true;
 		}
 		if (input == 'W') {
 			board.CompressUp();
 			board.MergeUp();
-			cout << endl << 'w';
 			should_move_board = true;
 		}
 		if (input == 'D') {
 			board.CompressRight();
 			board.MergeRight();
-			cout << endl << 'd';
 			should_move_board = true;
 		}
 		if (input == 'S') {
 			board.CompressDown();
 			board.MergeDown();
-			cout << endl << 's';
 			should_move_board = true;
 		}
 	} else if (current_state == LOSS && is_life_available && input == 'R') {
