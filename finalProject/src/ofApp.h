@@ -16,7 +16,9 @@ private:
 		LOSS
 	};
 
-	ofTrueTypeFont pixel_font;
+	ofTrueTypeFont pixel_font_;
+	ofTrueTypeFont pixel_font_small_;
+
 	ofSoundPlayer winning_tune;
 	ofSoundPlayer click;
 	ofSoundPlayer losing_tune;
@@ -46,32 +48,14 @@ private:
 
 	void drawLoss();
 
+	void drawReplayMessage();
+
 	void drawBeginningStage();
 
 	void drawTiles();
 
 	void keyPressed(int key);
-
-	void keyReleased(int key);
-
-	void mouseMoved(int x, int y );
-
-	void mouseDragged(int x, int y, int button);
-
-	void mousePressed(int x, int y, int button);
-
-	void mouseReleased(int x, int y, int button);
-	
-	void mouseEntered(int x, int y);
-	
-	void mouseExited(int x, int y);
-	
-	void windowResized(int w, int h);
-	
-	void dragEvent(ofDragInfo dragInfo);
-	
-	void gotMessage(ofMessage msg);
-	
+			
 	void CheckGameOver();
 
 	void initializeTileTheme();
@@ -85,9 +69,13 @@ private:
 	GameState current_state = BEGIN;
 
 	const std::string kBeginGame = "Press 'B' to begin 2048";
-	const std::string kScore = "Score: ";
 	const std::string kWonMessage = "You WON!";
 	const std::string kLostMessage = "You lost";
+	const std::string kReplayMessage = "Press 'N' to begin a new game";
+	const std::string kResurrectMessage = "Press 'R' to resurrect";
+	const std::string kInstructions = "Use keys 'W', 'A', 'S', 'D' to play";
+	const std::string kScore = "SCORE: ";
+	
 
 	map<int, pair<float, float>> positions;
 	float x = (ofGetWindowWidth() / 2) - (2 * kTileDimension) - kSpacing;

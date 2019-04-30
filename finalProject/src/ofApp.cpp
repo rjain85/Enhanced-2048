@@ -7,26 +7,11 @@
 Board board;
 Theme theme;
 
-void ofApp::candyButtonPressed() {
-	if (is_theme_candy_) {
-		is_theme_candy_ = false;
-	} else {
-		is_theme_candy_ = true;
-	}
-}
-
-void ofApp::earthyButtonPressed() {
-	if (is_theme_earthy_) {
-		is_theme_earthy_ = false;
-	} else {
-		is_theme_earthy_ = true;
-	}
-}
-
 void ofApp::setup() {
 	ofSetWindowTitle("2048");
 	ofBackground(171, 197, 245);
-	pixel_font.load("pixelmix.ttf", 35);
+	pixel_font_.load("pixelmix.ttf", 35);
+	pixel_font_small_.load("pixelmix.ttf", 18);
 	gui_.setup("Select Theme");
 	candy_.addListener(this, &ofApp::candyButtonPressed);
 	earthy_.addListener(this, &ofApp::earthyButtonPressed);
@@ -78,17 +63,17 @@ void ofApp::draw() {
 		if (is_life_available) {
 			heart_.draw(ofGetWindowWidth() - 150, 2, 125, 125);
 		}
-
 		drawBoard();
 		drawScore();
 		drawTiles();
+		drawReplayMessage();
 
 	} else if (current_state == WIN) {
 		drawBoard();
 		drawTiles();
 		drawWin();
 
-	} else if (current_state == LOSS){
+	} else if (current_state == LOSS) {
 		drawBoard();
 		drawTiles();
 		drawLoss(); 
@@ -120,16 +105,24 @@ void ofApp::drawBoard() {
 }
 
 void ofApp::drawScore() {
-	pixel_font.drawString(kScore + std::to_string(board.score_), 50, 75);
+	pixel_font_.drawString(kScore + std::to_string(board.score_), 50, 75);
 }
 
 void ofApp::drawWin() {
-	pixel_font.drawString(kWonMessage, 50, 75);
-
+	pixel_font_.drawString(kWonMessage, 50, 75);
+	drawReplayMessage();
 }
 
 void ofApp::drawLoss() {
-	pixel_font.drawString(kLostMessage, 50, 75);
+	pixel_font_.drawString(kLostMessage, 50, 75);
+	drawReplayMessage();
+	if (is_life_available) {
+		pixel_font_small_.drawString(kResurrectMessage, 50, ofGetHeight() - 75);
+	}
+}
+
+void ofApp::drawReplayMessage() {
+	pixel_font_small_.drawString(kReplayMessage, 50, ofGetHeight() - 35);
 }
 
 void ofApp::drawTiles() {
@@ -143,7 +136,8 @@ void ofApp::drawTiles() {
 }
 
 void ofApp::drawBeginningStage() {
-	pixel_font.drawString(kBeginGame, 50, 150);
+	pixel_font_.drawString(kBeginGame, 50, 150);
+	pixel_font_.drawString(kInstructions, 50, 225);
 }
 
 // shout out to Elizabeth
@@ -156,6 +150,8 @@ void ofApp::keyPressed(int key) {
 			losing_tune.stop();
 			should_update = true;
 			board.has_won_ = false;
+			is_theme_candy_ = false;
+			is_theme_earthy_ = false;
 			current_state = BEGIN;
 		}	
 	}
@@ -199,50 +195,6 @@ void ofApp::keyPressed(int key) {
 	}
 }
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
 
 void ofApp::CheckGameOver() {
 	if (board.has_won_) {
@@ -260,14 +212,23 @@ void ofApp::CheckGameOver() {
 void ofApp::initializeTileTheme() {
 	if (is_theme_candy_ && !is_theme_earthy_ || is_theme_candy_ && is_theme_earthy_ || !is_theme_candy_ && !is_theme_earthy_) {
 		theme.SetUpCandyTileMap();
-	}
-	else {
+	} else {
 		theme.SetUpEarthyTileMap();
 	}
 }
 
+void ofApp::candyButtonPressed() {
+	if (is_theme_candy_) {
+		is_theme_candy_ = false;
+	} else {
+		is_theme_candy_ = true;
+	}
+}
 
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::earthyButtonPressed() {
+	if (is_theme_earthy_) {
+		is_theme_earthy_ = false;
+	} else {
+		is_theme_earthy_ = true;
+	}
 }
