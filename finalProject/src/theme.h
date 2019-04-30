@@ -3,24 +3,29 @@
 
 class Theme {
 public:
-	// Methods to load tile images:
-
+	/**
+	 * Methods to load tile images:
+	**/
 	void LoadCandyTiles();
 
 	void LoadEarthyTiles();
 
-	// Methods to populate tile map:
-
+	/**
+	 * Methods to populate tile map:
+	**/
 	void SetUpCandyTileMap();
 
 	void SetUpEarthyTileMap();
 
-	// Map matching tile values with tile images:
-
+	/**
+	 * Map matching tile values with tile images:
+	**/
 	map<int, ofImage> tiles;
 
 private:
-	// ofImage objects to store candy tiles;
+	/**
+	 * ofImage objects to store candy tiles;
+	**/
 	ofImage tile_two_candy_;
 	ofImage tile_four_candy_;
 	ofImage tile_eight_candy_;
@@ -33,7 +38,9 @@ private:
 	ofImage tile_ten_twenty_four_candy_;
 	ofImage tile_twenty_forty_eight_candy_;
 
-	// ofImage objects to store earthy tiles
+	/** 
+	 * ofImage objects to store earthy tiles
+	**/
 	ofImage tile_two_earthy_;
 	ofImage tile_four_earthy_;
 	ofImage tile_eight_earthy_;
@@ -46,7 +53,9 @@ private:
 	ofImage tile_ten_twenty_four_earthy_;
 	ofImage tile_twenty_forty_eight_earthy_;
 
-	// Candy tile file names:
+	/**
+	 * Candy tile file names:
+	**/
 	const std::string k2Candy = "2tile.png";
 	const std::string k4Candy = "4tile.png";
 	const std::string k8Candy = "8tile.png";
@@ -59,7 +68,9 @@ private:
 	const std::string k1024Candy = "1024tile.png";
 	const std::string k2048Candy = "2048tile.png";
 
-	// Earthy tile file names:
+	/** 
+	 * Earthy tile file names:
+	**/
 	const std::string k2Earthy = "2f.png";
 	const std::string k4Earthy = "4f.png";
 	const std::string k8Earthy = "8f.png";
