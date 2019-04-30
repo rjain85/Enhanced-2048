@@ -30,6 +30,12 @@ public:
 
 	bool HasLost();
 
+	void ResurrectPlayer();
+
+	size_t highest_value = 2;
+
+	size_t position_of_highest_value = 0;
+
 	void UpdateHasWon(size_t value);
 
 	void CompressLeft();

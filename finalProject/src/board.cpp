@@ -85,7 +85,10 @@ void Board::MergeLeft() {
 			// If the tile value doesn't equal zero and the tile to the right of it has the value zero, the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[i][j].value != 0 && board_[i][j].value == board_[i][j + 1].value) {
 				board_[i][j].value += board_[i][j + 1].value;
-				//board_[i][j].contributors += board_.
+
+				if (board_[i][j].value > highest_value) {
+					highest_value = board_[i][j].value;
+				}
 				board_[i][j + 1].value = 0;
 				// The score is updated.
 				score_ += ((log2(board_[i][j].value)) - 1) * board_[i][j].value;
@@ -123,6 +126,11 @@ void Board::MergeUp() {
 			// the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[j][i].value != 0 && board_[j][i].value == board_[j + 1][i].value) {
 				board_[j][i].value += board_[j + 1][i].value;
+
+				if (board_[j][i].value > highest_value) {
+					highest_value = board_[j][i].value;
+				}
+
 				board_[j + 1][i].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
@@ -159,6 +167,11 @@ void Board::MergeRight() {
 			// If the tile value doesn't equal zero and the tile to the left of it has the value zero, the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[i][j].value != 0 && board_[i][j].value == board_[i][j - 1].value) {
 				board_[i][j].value += board_[i][j - 1].value;
+
+				if (board_[i][j].value > highest_value) {
+					highest_value = board_[i][j].value;
+				}
+
 				board_[i][j - 1].value = 0;
 				// The score is updated.
 				score_ += (((log2(board_[i][j].value)) - 1) * board_[i][j].value);
@@ -195,6 +208,11 @@ void Board::MergeDown() {
 			// If the tile value doesn't equal zero and the tile above it has the value zero, the value of the first tile equals their sum and the value of the second tile becomes zero.
 			if (board_[j][i].value != 0 && board_[j][i].value == board_[j - 1][i].value) {
 				board_[j][i].value += board_[j - 1][i].value;
+
+				if (board_[j][i].value > highest_value) {
+					highest_value = board_[j][i].value;
+				}
+
 				board_[j - 1][i].value = 0;
 				//The score is updated.
 				score_ += (((log2(board_[j][i].value)) - 1) * board_[j][i].value);
@@ -250,7 +268,18 @@ bool Board::HasLost() {
 	return true;
 }
 
-void Board::UpdateHasWon(size_t value) { // updatehaswon
+void Board::ResurrectPlayer() {
+	for (int i = 0; i < kBoardDimension; i++) { 
+		for (int j = 0; j < kBoardDimension; j++) {
+			if (board_[i][j].value != highest_value) {
+				board_[i][j].value = 0;
+			}
+		}
+	}
+	SpawnNewTwo(FindEmptyPositions());
+}
+
+void Board::UpdateHasWon(size_t value) { 
 	if (value == kWinningNumber) {
 		has_won_ = true;
 	}
