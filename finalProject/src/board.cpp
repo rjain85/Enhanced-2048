@@ -7,9 +7,9 @@
 void Board::InitBoard() {
 	// Select a random position for the first tile.
 	int first_tile_postion = rand() % kNumOfTiles + 1;
-	int second_tile_position = first_tile_postion;
+	int second_tile_position = rand() % kNumOfTiles + 1;
 
-	// Select a random position for the second tile and ensure that it is not the same as the first.
+	// Ensure that the second tile position is not the same as the first.
 	while (second_tile_position == first_tile_postion) {
 		second_tile_position = rand() % kNumOfTiles + 1;
 	}
