@@ -22,10 +22,14 @@ private:
 	ofxPanel gui_;
 	ofxButton candy_;
 	ofxButton earthy_;
+	ofImage heart_;
+
 	void candyButtonPressed();
 	void earthyButtonPressed();
 	bool is_theme_candy_ = false;
 	bool is_theme_earthy_ = false;
+
+	bool is_life_available = true;
 		
 	void setup();
 

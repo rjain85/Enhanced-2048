@@ -30,7 +30,7 @@ void ofApp::setup() {
 	gui_.setup("Select Theme");
 	candy_.addListener(this, &ofApp::candyButtonPressed);
 	earthy_.addListener(this, &ofApp::earthyButtonPressed);
-
+	heart_.load("pixelheart.gif");
 	theme.LoadCandyTiles();
 	theme.LoadEarthyTiles();
 
@@ -72,14 +72,21 @@ void ofApp::draw() {
 	if (current_state == BEGIN) {
 		drawBeginningStage();
 		gui_.draw();
+
 	} else if (current_state == PLAY) {
+		if (is_life_available) {
+			heart_.draw(ofGetWindowWidth() - 150, 2, 125, 125);
+		}
+
 		drawBoard();
 		drawScore();
 		drawTiles();
+
 	} else if (current_state == WIN) {
 		drawBoard();
 		drawTiles();
 		drawWin();
+
 	} else if (current_state == LOSS){
 		drawBoard();
 		drawTiles();
@@ -144,9 +151,9 @@ void ofApp::keyPressed(int key) {
 
 	if (current_state == WIN || current_state == PLAY || current_state == LOSS) {
 		if (input == 'N') {
-			current_state = SETUP;
 			should_update = true;
-			cout << "new game plz";
+			board.has_won_ = false;
+			current_state = SETUP;
 		}	
 	}
 	if (current_state == BEGIN) {
@@ -179,7 +186,12 @@ void ofApp::keyPressed(int key) {
 			cout << endl << 's';
 			should_move_board = true;
 		}
-	} 
+	} else if (current_state == LOSS && is_life_available && input == 'R') {
+		board.ResurrectPlayer();
+		is_life_available = false;
+		should_update = true;
+		current_state = PLAY;
+	}
 }
 
 //--------------------------------------------------------------
@@ -243,7 +255,7 @@ void ofApp::initializeTileTheme() {
 	if (is_theme_candy_ && !is_theme_earthy_ || is_theme_candy_ && is_theme_earthy_ || !is_theme_candy_ && !is_theme_earthy_) {
 		theme.SetUpCandyTileMap();
 	}
-	else /*if (earthy_ && !candy_)*/{
+	else {
 		theme.SetUpEarthyTileMap();
 	}
 }
