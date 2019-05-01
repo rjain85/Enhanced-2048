@@ -1,7 +1,8 @@
 # Development log
 
 ## April 6
-- I had a great deal of difficulty actually cloning the code from GitHub. Cloning directly into Visual Studio did not work. Here is what needed to be done:
+- I had a great deal of difficulty actually cloning the code from GitHub. Cloning directly into Visual Studio did not work
+- Here is what needed to be done:
 	- First I cloned the given code into the folder where I always put my C++ projects using Git Bash
 	- Next, I opened my openFrameworks folder and then opened the folder projectGenerator-vs 
 	- From there I opened the projectGenerator.exe GUI
@@ -119,7 +120,7 @@
 - Added option to "resurrect" after your first loss (preserve your score and highest tile value)
 	- Added ResurrectPlayer method and highest value and highest value position varaiables to board class, as well as functionality to track these variables
 - Whether or not the player has "a life" available is stored in a boolean
-- Added a small heart graphic to be displayed when the player has a life available: https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwitjqPNtvjhAhXh01kKHZpODEwQjhx6BAgBEAM&url=https%3A%2F%2Fwww.pinterest.ca%2Fpin%2F558516791280955477%2F&psig=AOvVaw3b9etDZIBtStH0TUEKtW9p&ust=1556734632853184
+- Added a small heart graphic to be displayed when the player has a life available
 - Changed font to "Pixel Mix"
 - Imported song "All Star" by Smash Mouth, to be played when a player loses the game (to provide encouragement!)
 - Created a new theme class to store tile themes. This includes "Candy" (original theme) and "Earthy" (new theme)
