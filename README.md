@@ -42,3 +42,5 @@ Below is a full demo of the Enhanced 2048 Game. Note that the user can change th
  - https://www.dafont.com/bitmap.php
 * The heart graphic:
  - https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwitjqPNtvjhAhXh01kKHZpODEwQjhx6BAgBEAM&url=https%3A%2F%2Fwww.pinterest.ca%2Fpin%2F558516791280955477%2F&psig=AOvVaw3b9etDZIBtStH0TUEKtW9p&ust=1556734632853184
+
+ ## Erratum
