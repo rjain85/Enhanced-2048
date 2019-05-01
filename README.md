@@ -28,3 +28,17 @@ Below is a full demo of the Enhanced 2048 Game. Note that the user can change th
 </p>
 
 ## Citations
+* This README, and some methods are adapted from Elizabeth Wang: 
+ - https://github.com/ElizWang/Enhanced_Pacman
+* Some sources that helped me with the compress and merge methods in the board.cpp class
+ - https://steven.codes/blog/cs10/2048-merge/ 
+ - https://gist.github.com/chandruscm/2481133c6f110ced6dd7
+* I used the following websites to generate color palettes for the themes:
+ - https://www.colorhexa.com/
+ - https://meyerweb.com/eric/tools/color-blend/#87ADF1:FFCCFF:2:hex
+* I created the tile images using this website:
+ - https://www.canva.com/;
+* I found the PixelMix font on this website:
+ - https://www.dafont.com/bitmap.php
+* The heart graphic:
+ - https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwitjqPNtvjhAhXh01kKHZpODEwQjhx6BAgBEAM&url=https%3A%2F%2Fwww.pinterest.ca%2Fpin%2F558516791280955477%2F&psig=AOvVaw3b9etDZIBtStH0TUEKtW9p&ust=1556734632853184
