@@ -2,7 +2,7 @@
 
 /**
  * Load candy tile images to ofImage objects.
-**/
+ */
 void Theme::LoadCandyTiles() {
 	tile_two_candy_.load(k2Candy);
 	tile_four_candy_.load(k4Candy);
@@ -19,7 +19,7 @@ void Theme::LoadCandyTiles() {
 
 /**
  * Load earthy tile images to ofImage objects.
-**/
+ */
 void Theme::LoadEarthyTiles() {
 	tile_two_earthy_.load(k2Earthy);
 	tile_four_earthy_.load(k4Earthy);
@@ -36,7 +36,7 @@ void Theme::LoadEarthyTiles() {
 
 /**
  * Populate tile map with candy tiles so that the integer key corresponds to the value displayed on the tile.
-**/
+ */
 void Theme::SetUpCandyTileMap() {
 	tiles[2] = tile_two_candy_;
 	tiles[4] = tile_four_candy_;
@@ -53,7 +53,7 @@ void Theme::SetUpCandyTileMap() {
 
 /**
  * Populate tile map with earthy tiles so that the integer key corresponds to the value displayed on the tile.
-**/
+ */
 void Theme::SetUpEarthyTileMap() {
 	tiles[2] = tile_two_earthy_;
 	tiles[4] = tile_four_earthy_;

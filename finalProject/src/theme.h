@@ -1,31 +1,41 @@
 #pragma once
 #include "ofMain.h"
 
+/**
+ * Class to load and organize images corresponding to the tile themes.
+ */
 class Theme {
+
 public:
 	/**
-	 * Methods to load tile images:
-	**/
+	 * Load candy tile images.
+	 */
 	void LoadCandyTiles();
 
+	/**
+	 * Load earthy tile images.
+	 */
 	void LoadEarthyTiles();
 
 	/**
-	 * Methods to populate tile map:
-	**/
+	 * Populate tile map with candy themed tiles.
+	 */
 	void SetUpCandyTileMap();
 
+	/**
+	 * Populate tile map with earthy themed tiles.
+	 */
 	void SetUpEarthyTileMap();
 
 	/**
-	 * Map matching tile values with tile images:
-	**/
+	 * Map matching tile values with tile images.
+	 */
 	map<int, ofImage> tiles;
 
 private:
 	/**
 	 * ofImage objects to store candy tiles;
-	**/
+	 */
 	ofImage tile_two_candy_;
 	ofImage tile_four_candy_;
 	ofImage tile_eight_candy_;
@@ -40,7 +50,7 @@ private:
 
 	/** 
 	 * ofImage objects to store earthy tiles
-	**/
+	 */
 	ofImage tile_two_earthy_;
 	ofImage tile_four_earthy_;
 	ofImage tile_eight_earthy_;
@@ -55,7 +65,7 @@ private:
 
 	/**
 	 * Candy tile file names:
-	**/
+	 */
 	const std::string k2Candy = "2tile.png";
 	const std::string k4Candy = "4tile.png";
 	const std::string k8Candy = "8tile.png";
@@ -70,7 +80,7 @@ private:
 
 	/** 
 	 * Earthy tile file names:
-	**/
+	 */
 	const std::string k2Earthy = "2f.png";
 	const std::string k4Earthy = "4f.png";
 	const std::string k8Earthy = "8f.png";
