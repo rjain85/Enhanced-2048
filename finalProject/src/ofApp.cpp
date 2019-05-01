@@ -22,7 +22,7 @@ Theme theme;
 **/
 void ofApp::setup() {
 	ofSetWindowTitle(kName);
-	ofBackground(171, 197, 245);
+	ofBackground(kBlue);
 
 	SetupGui();
 
@@ -109,7 +109,7 @@ void ofApp::update() {
  * During PLAY, draw the board, score, tiles, replay message, and also the heart if necessary.
 **/
 void ofApp::draw() {
-	ofSetColor(255, 255, 255);
+	ofSetColor(kWhite);
 
 	if (current_state_ == BEGIN) {
 		DrawBeginningStage();
@@ -154,11 +154,11 @@ void ofApp::DrawBoard() {
 	int position_y = starting_point_y;
 
 	// Draw a pale blue-gray backboard.
-	ofSetColor(214, 229, 255);
+	ofSetColor(kBlueGray);
 	ofDrawRectangle(starting_point_x - kSpacing, starting_point_y - kSpacing, kBackBoardDimension, kBackBoardDimension);
 	
 	// Draw tiles in white.
-	ofSetColor(255, 255, 255);
+	ofSetColor(kWhite);
 
 	// Number the tiles.
 	int position_counter = 1;

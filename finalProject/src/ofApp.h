@@ -183,4 +183,8 @@ private:
 	const char kLeft = 'A';
 	const char kDown = 'S';
 	const char kRight = 'D';
+
+	const ofColor kBlue = ofColor(171, 197, 245);
+	const ofColor kWhite = ofColor(255, 255, 255);
+	const ofColor kBlueGray = ofColor(214, 229, 255);
 };
