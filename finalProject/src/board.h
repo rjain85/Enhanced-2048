@@ -21,7 +21,7 @@ public:
 		size_t value;
 
 		/**
-		 * A value ranging from 1 - 16 corresponding to the tile's position in the board.
+		 * A value ranging from 1 - 16 corresponding to tile's position in the board.
 		*/
 		size_t board_position;
 	};
