@@ -4,12 +4,12 @@
 
 /**
  * Maintain values and run methods via a Board object.
-**/
+ */
 Board board;
 
 /**
  * Load tile images via a theme object.
-**/
+ */
 Theme theme;
 
 /**
@@ -19,7 +19,7 @@ Theme theme;
  * Load heart image and tile themes.
  * Load music.
  * Play beginning music.
-**/
+ */
 void ofApp::setup() {
 	ofSetWindowTitle(kName);
 	ofBackground(kBlue);
@@ -37,7 +37,7 @@ void ofApp::setup() {
  * Set up theme panel using ofxGui.
  * Set up button to select Candy and Earthy themes.
  * Label panel and buttons.
-**/
+ */
 void ofApp::SetupGui() {
 	gui_.setup(kThemeLabel);
 	candy_.addListener(this, &ofApp::CandyButtonPressed);
@@ -48,7 +48,7 @@ void ofApp::SetupGui() {
 
 /**
  * Load a large and small pixel font.
-**/
+ */
 void ofApp::LoadFonts() {
 	pixel_font_large_.load(kPixelFont, kLargeFontSize);
 	pixel_font_small_.load(kPixelFont, kSmallFontSize);
@@ -56,7 +56,7 @@ void ofApp::LoadFonts() {
 
 /**
  * Load music and sound effects to be played throughout game.
-**/
+ */
 void ofApp::LoadSound() {
 	winning_tune_.load(kWinningTune);
 	losing_tune_.load(kLosingTune);
@@ -66,7 +66,7 @@ void ofApp::LoadSound() {
 
 /** 
  * Load heart image and candy and earthy tile images.
-**/
+ */
 void ofApp::LoadImages() {
 	heart_.load(kHeartImage);
 	theme.LoadCandyTiles();
@@ -77,7 +77,7 @@ void ofApp::LoadImages() {
  * Run soley when update variable is true:
  * During SETUP, select the theme chosen by the user and initialize the board before moving to PLAY
  * During PLAY, update the game after each keypress.
-**/
+ */
 void ofApp::update() {
 	if (should_update_ == true) {
 		if (current_state_ == SETUP) {
@@ -107,7 +107,7 @@ void ofApp::update() {
  * Set color to white.
  * During BEGIN, draw beginning stage and ofxGui panel.
  * During PLAY, draw the board, score, tiles, replay message, and also the heart if necessary.
-**/
+ */
 void ofApp::draw() {
 	ofSetColor(kWhite);
 
@@ -140,7 +140,7 @@ void ofApp::draw() {
 /**
  * Draw the board.
  * Populate the positions map so the positions correspond to the x and y coordinates of the tiles.
-**/
+ */
 void ofApp::DrawBoard() {
 	float height = ofGetWindowHeight();
 	float width = ofGetWindowWidth();
@@ -180,7 +180,7 @@ void ofApp::DrawBoard() {
 }
 /**
  * Display a message showing the score.
-**/
+ */
 void ofApp::DrawScore() {
 	pixel_font_large_.drawString(kScore + std::to_string(board.score_), 50, 75);
 }
@@ -188,7 +188,7 @@ void ofApp::DrawScore() {
 /**
  * Display a message showing that the player has won.
  * Display a message prompting the player to replay.
-**/
+ */
 void ofApp::DrawWin() {
 	pixel_font_large_.drawString(kWonMessage, 50, 75);
 	DrawReplayMessage();
@@ -198,7 +198,7 @@ void ofApp::DrawWin() {
  * Display a message showing that the player has lost.
  * Display a message prompting the player to replay.
  * Display a message prompting the player to resurrect if they have not already done so.
-**/
+ */
 void ofApp::DrawLoss() {
 	pixel_font_large_.drawString(kLostMessage, 50, 75);
 	DrawReplayMessage();
@@ -209,7 +209,7 @@ void ofApp::DrawLoss() {
 
 /**
  * Display a message prompting the player to replay.
-**/
+ */
 void ofApp::DrawReplayMessage() {
 	pixel_font_small_.drawString(kReplayMessage, 50, ofGetHeight() - 35);
 }
@@ -218,7 +218,7 @@ void ofApp::DrawReplayMessage() {
  * Read the position of each tile in the board, find the corresponding x and y coordinates in the positions map.
  * Read the value of each tile in the map, find the corresponding image in the theme.tiles map.
  * Draw that tile image at the coordinates.
-**/
+ */
 void ofApp::DrawTiles() {
 	int counter = 1;
 	for (int i = 0; i < board.kBoardDimension; i++) {
@@ -231,7 +231,7 @@ void ofApp::DrawTiles() {
 
 /** 
  * Draw a message prompting the player to begin the game and provide instructions
-**/
+ */
 void ofApp::DrawBeginningStage() {
 	pixel_font_large_.drawString(kBeginGame, 50, 150);
 	pixel_font_large_.drawString(kInstructions, 50, 225);
@@ -248,7 +248,8 @@ void ofApp::DrawBeginningStage() {
  * If the player presses 'S', the board shifts down.
  * If the player pressed 'D', the board shifts right.
  * If the state is LOSS and the player hasn't used up their life, they may press 'R' to resurrect. 
-**/
+ * @param - a key inputted by the user.
+ */
 void ofApp::keyPressed(int key) {
 	int input = toupper(key);
 
@@ -302,7 +303,7 @@ void ofApp::keyPressed(int key) {
 /**
  * If the player has won, stop updating, change state to WIN, and play winning music.
  * If the player has lost, stop updating, change state to LOSS, and play losing music.
-**/
+ */
 void ofApp::CheckGameOver() {
 	if (board.has_won_) {
 		should_update_ = false;
@@ -320,7 +321,7 @@ void ofApp::CheckGameOver() {
  * If the player selects the candy theme, poplate the tile map with candy tiles.
  * If the player selects both themes or no theme, default to populating the tile map with candy tiles.
  * Otherwise (in the case that the earth theme is selected) populate the theme map with earthy tiles.
-**/
+ */
 void ofApp::InitTileTheme() {
 	if (is_theme_candy_ && !is_theme_earthy_ || is_theme_candy_ && is_theme_earthy_ || !is_theme_candy_ && !is_theme_earthy_) {
 		theme.SetUpCandyTileMap();
@@ -331,7 +332,7 @@ void ofApp::InitTileTheme() {
 
 /**
  * Return global variables to their default states to reset a game.
-**/
+ */
 void ofApp::ReturnToDefaults() {
 	should_update_ = true;
 	is_life_available_ = true;
@@ -343,7 +344,7 @@ void ofApp::ReturnToDefaults() {
 
 /**
  * When the candy button is pressed, flip the state of the is_theme_candy_ variable.
-**/
+ */
 void ofApp::CandyButtonPressed() {
 	if (is_theme_candy_) {
 		is_theme_candy_ = false;
@@ -354,7 +355,7 @@ void ofApp::CandyButtonPressed() {
 
 /**
  * When the earthy button is pressed, flip the state of the is_theme_earthy_ variable.
-**/
+ */
 void ofApp::EarthyButtonPressed() {
 	if (is_theme_earthy_) {
 		is_theme_earthy_ = false;
