@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp";
@@ -164,4 +164,4 @@ TEST_CASE("Check if CompressDown and MergeDown operate correctly") {
 	REQUIRE(tester.board_[3][1].value == 8);
 	REQUIRE(tester.board_[3][2].value == 2);
 	REQUIRE(tester.board_[3][3].value == 0);
-} */
+} 
