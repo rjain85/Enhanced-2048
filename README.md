@@ -24,7 +24,7 @@ I wrote this code in accordance with the Google C++ Style Guide (https://google.
 ## Demo
 Below is a full demo of the Enhanced 2048 Game. Note that the user can change the tile theme and can resurrect after their first loss.
 <p align="center">
-  <img width="500" height="450" src="final-project-rjain85/finalProject/bin/data/demo/Enhanced-2048.gif">
+  <img width="500" height="450" src="finalProject/bin/data/demo/Enhanced-2048.gif">
 </p>
 
 ## Citations
