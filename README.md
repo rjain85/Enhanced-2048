@@ -5,7 +5,7 @@
  * Citations 
 
 ## Overview 
-I created a version of 2048 in which the user can select one of two color themes and has the option to resurrect after they die.
+I created a version of the game 2048 in which the user can select one of two color themes and has the option to resurrect after they die.
 
 ## Requirements
 * OpenFrameworks version 0.10.1 or higher. Install OpenFrameworks by following the instructions at http://openframeworks.cc/download/ 
@@ -30,7 +30,7 @@ Below is a full demo of the Enhanced 2048 Game. Note that the user can change th
 ## Citations
 * This README, and some methods are adapted from Elizabeth Wang: 
 	- https://github.com/ElizWang/Enhanced_Pacman
-* Some sources that helped me with the compress and merge methods in the board.cpp class
+* Some sources that helped me with the compress and merge methods in the board.cpp class:
 	- https://steven.codes/blog/cs10/2048-merge/ 
 	- https://gist.github.com/chandruscm/2481133c6f110ced6dd7
 * I used the following websites to generate color palettes for the themes:
@@ -42,5 +42,3 @@ Below is a full demo of the Enhanced 2048 Game. Note that the user can change th
 	- https://www.dafont.com/bitmap.php
 * The heart graphic:
 	- https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwitjqPNtvjhAhXh01kKHZpODEwQjhx6BAgBEAM&url=https%3A%2F%2Fwww.pinterest.ca%2Fpin%2F558516791280955477%2F&psig=AOvVaw3b9etDZIBtStH0TUEKtW9p&ust=1556734632853184
-
- ## Erratum
