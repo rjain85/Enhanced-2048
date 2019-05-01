@@ -6,6 +6,7 @@
  * Initialize the board at the beginning of the game to be empty with only two tiles. 
  * One tile has the value 2, the other one has the value 2 or 4. 
  * Number the board position of each tile.
+ * Initialize the value of all other tiles to be 0.
  */
 void Board::InitBoard() {
 	// Select a random position for the first tile.
@@ -40,6 +41,7 @@ void Board::InitBoard() {
 
 /**
  * Return a vector of positions in the board where the value is 0 (essentially, that position is 'empty').
+ * @return - vector<size_t> with values coressponding to positions of the tiles on the board
 */
 vector<size_t> Board::FindEmptyPositions() {
 	vector<size_t> possible_postions;
@@ -75,7 +77,8 @@ void Board::CompressLeft() {
 }
 
 /**
- * Merge values of tiles leftwards.
+ * Merge values of tiles leftwards so that adjacent values are summed.
+ * Compress them again.
  */
 void Board::MergeLeft() {
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -119,7 +122,8 @@ void Board::CompressUp() {
 }
 
 /** 
- * Merge values of tiles upwards.
+ * Merge values of tiles upwards so that adjacent values are summed.
+ * Compress them again.
 */
 void Board::MergeUp() {
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -141,7 +145,9 @@ void Board::MergeUp() {
 	CompressUp();
 }
 
-// Move all the tiles rightwards so that no zeroes lie between nonzero values.
+/**
+ * Move all the tiles rightwards so that no zeroes lie between nonzero values.
+ */
 void Board::CompressRight() {
 	for (int i = 0; i < kBoardDimension; i++) {
 		for (int j = kBoardDimension - 1; j >= 0; j--) {
@@ -159,8 +165,9 @@ void Board::CompressRight() {
 	}
 }
 
-/** 
- * Merges values of tiles rightwards.
+/**
+ * Merge values of tiles rightwards so that adjacent values are summed.
+ * Compress them again.
 */
 void Board::MergeRight() {
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -203,8 +210,9 @@ void Board::CompressDown() {
 	}
 }
 
-/** 
- * Merge values of tiles downwards.
+/**
+ * Merge values of tiles downwards so that adjacent values are summed.
+ * Compress them again.
 */
 void Board::MergeDown() {
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -242,6 +250,8 @@ void Board::InitCopy() {
 
 /** 
  * Copy the values from the initial board to the copy board.
+ * @param - initial - the initial board
+ * @param - copy - the array that the board is copied to
 */
 void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -254,6 +264,9 @@ void Board::CopyBoard(Tile initial[4][4], Tile copy[4][4]) {
 /** 
  * Compare each value in the initial board to the copy to see if they are equal.
  * This method is used to determine if a move actaully affected the board in any way.
+ * @param - initial - the initial board 
+ * @param - copy - the array that the board is copied to
+ * @return - bool representing whether the two bools passed are equal
 */
 bool Board::AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]) { 
 	for (int i = 0; i < kBoardDimension; i++) {
@@ -271,6 +284,7 @@ bool Board::AreBoardsEqual(Tile initial[4][4], Tile copy[4][4]) {
  * If there are empty position(s) on the board, the player has NOT lost.
  * If any two tiles that are vertically or horizontally adjacent have the same value, the player has NOT lost.
  * If neither of those conditions are met, the player has won
+ * @return - bool representing whether the player has lost
 */
 bool Board::HasLost() {
 	if (!FindEmptyPositions().empty()) { 
@@ -306,6 +320,7 @@ void Board::ResurrectPlayer() {
 
 /**
  * If the the value equals the winning number, the player has won.
+ * @param - value - the value of a specific tile in the board.
 */
 void Board::UpdateHasWon(size_t value) { 
 	if (value == kWinningNumber) {
@@ -315,6 +330,7 @@ void Board::UpdateHasWon(size_t value) {
 
 /**
  * If the the value exceeds the highest value on the board, the variable is updated.
+ * @param - value - the value of a specific tile in the board.
 */
 void Board::UpdateHighestValue(size_t value) {
 	if (value > highest_value) {
@@ -325,6 +341,7 @@ void Board::UpdateHighestValue(size_t value) {
 /**
  * Update the score variable.
  * Add the value of the new tile times a multiplier.
+ * @param - value - the value of a specific tile in the board.
 */
 void Board::UpdateScore(size_t value) {
 	score_ += ((log2(value)) - 1) * value;
@@ -332,7 +349,7 @@ void Board::UpdateScore(size_t value) {
 
 /**
  * Set up the game by initiating a new board and copy.
- * Maintain the score to be 0;
+ * Maintain the score to be 0.
 */
 void Board::SetUpGame() {
 	InitBoard();
@@ -341,7 +358,8 @@ void Board::SetUpGame() {
 }
 
 /**
- * Randomly return either value 2 or 4;
+ * Randomly select either value 2 or 4.
+ * @return - size_t.
 */
 size_t Board::ChooseTwoOrFour() {
 	int random = rand() % 2;
@@ -354,6 +372,7 @@ size_t Board::ChooseTwoOrFour() {
 
 /**
  * Randomly select an empty position on the board and spawn a new two in its place.
+ * @param - vector<size_t> &possible_positions - with values coressponding to positions of the empty tiles on the board.
 */
 void Board::SpawnNewTwo(vector<size_t> &possible_positions) {
 	// Prevent a divide by 0 error.
