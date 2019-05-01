@@ -4,6 +4,9 @@
 #include "ofMain.h"
 using std::vector;
 
+/**
+ * class to store and manipulate the state of the 2048 game board.
+ */
 class Board {
 
 public:
