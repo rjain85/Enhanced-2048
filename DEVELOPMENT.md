@@ -143,3 +143,9 @@
 	- Unfortunately my bin is not part of my repo so currently the gif cannot be displayed on the README.md
 - Added a few test cases for compress and merge methods using Catch2
 	- Unfortunately you need to comment out the main to run the test cases
+
+## May 1st
+- Updated documentation
+- Added data folder to GitHub
+- Finished writing README (complete with GIF)
+- I think I'm done!
