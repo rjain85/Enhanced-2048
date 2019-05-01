@@ -194,9 +194,11 @@
     <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxSlider.cpp" />
     <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxSliderGroup.cpp" />
     <ClCompile Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="src\test.cpp" />
     <ClCompile Include="src\theme.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\catch.hpp" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\board.h" />
     <ClInclude Include="..\..\..\..\Program Files (x86)\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxBaseGui.h" />

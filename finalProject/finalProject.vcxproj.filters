@@ -49,6 +49,9 @@
     <ClCompile Include="src\theme.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\test.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -62,6 +65,9 @@
     </Filter>
     <Filter Include="addons\ofxGui\src">
       <UniqueIdentifier>{645E9533-4DCD-6179-1CDF-CB65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{e4770fea-5f6e-4312-afe0-3b59e51b4816}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +114,9 @@
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
     <ClInclude Include="src\theme.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\catch.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
